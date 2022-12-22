@@ -1,4 +1,4 @@
-package com.example.teacherreview
+package com.example.teacherreview.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +20,7 @@ class LoginPageActivity : AppCompatActivity() {
 
 
         //Testing for checking if Fragments are Working Properly
-        val intent = Intent(this,HomePageActivity::class.java)
+        val intent = Intent(this, HomePageActivity::class.java)
 
         //Starting the next Activity
         startActivity(intent)

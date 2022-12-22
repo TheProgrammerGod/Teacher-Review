@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/teacherListFragment"
-        android:name="com.example.teacherreview.fragments.TeacherListFragment"
+        android:name="com.example.teacherreview.ui.fragments.TeacherListFragment"
         android:label="fragment_teacher_list"
         tools:layout="@layout/fragment_teacher_list" >
         <action
@@ -19,22 +19,22 @@
     </fragment>
     <fragment
         android:id="@+id/giveTeacherReviewFragment"
-        android:name="com.example.teacherreview.fragments.GiveTeacherReviewFragment"
+        android:name="com.example.teacherreview.ui.fragments.GiveTeacherReviewFragment"
         android:label="fragment_give_teacher_review"
         tools:layout="@layout/fragment_give_teacher_review" />
     <fragment
         android:id="@+id/showTeacherReviewFragment"
-        android:name="com.example.teacherreview.fragments.ShowTeacherReviewFragment"
+        android:name="com.example.teacherreview.ui.fragments.ShowTeacherReviewFragment"
         android:label="fragment_show_teacher_review"
         tools:layout="@layout/fragment_show_teacher_review" />
     <fragment
         android:id="@+id/studentProfileFragment"
-        android:name="com.example.teacherreview.fragments.StudentProfileFragment"
+        android:name="com.example.teacherreview.ui.fragments.StudentProfileFragment"
         android:label="fragment_student_profile"
         tools:layout="@layout/fragment_student_profile" />
     <fragment
         android:id="@+id/studentReviewHistoryFragment"
-        android:name="com.example.teacherreview.fragments.StudentReviewHistoryFragment"
+        android:name="com.example.teacherreview.ui.fragments.StudentReviewHistoryFragment"
         android:label="fragment_student_review_history"
         tools:layout="@layout/fragment_student_review_history" />
 </navigation>
