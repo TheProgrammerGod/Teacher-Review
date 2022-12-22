@@ -1,11 +1,11 @@
-package com.example.teacherreview
+package com.example.teacherreview.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.teacherreview.R
 import com.example.teacherreview.databinding.ActivityHomePageBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomePageActivity : AppCompatActivity() {
 
