@@ -16,16 +16,9 @@ class HomePageActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
-
-
-
-
         // Navigation Controller Setup
-//        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        val bottomNavigationView = binding.bottomNavigationView
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.NavHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
-        bottomNavigationView.setupWithNavController(navController)
+        binding.bottomNavigationView.setupWithNavController(navController)
     }
 }
