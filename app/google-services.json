@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "930992694255",
+    "project_id": "teacher-review-187ae",
+    "storage_bucket": "teacher-review-187ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930992694255:android:313b3dedff80ea4f2b0c1a",
+        "android_client_info": {
+          "package_name": "com.example.teacherreview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930992694255-m5lapk50h03m9o8srvt54roa2cjtn9e4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpLnPLtG_lHvIlV4bzmX1aj9UOvl6nvoo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930992694255-m5lapk50h03m9o8srvt54roa2cjtn9e4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
