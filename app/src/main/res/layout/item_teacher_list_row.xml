@@ -8,7 +8,7 @@
     android:background="@color/darker_black">
 
     <ImageView
-        android:id="@+id/ivProfilePic"
+        android:id="@+id/ivProfilePic_Item_Teacher_List"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
@@ -23,7 +23,7 @@
         app:srcCompat="@drawable/test_image_icon" />
 
     <TextView
-        android:id="@+id/tvTeacherName"
+        android:id="@+id/tvTeacherName_Item_Teacher_List"
         style="@style/TextViewBlue_20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,12 +31,12 @@
         android:layout_marginTop="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
+        app:layout_constraintStart_toEndOf="@+id/ivProfilePic_Item_Teacher_List"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Dr S.k Badi" />
 
     <TextView
-        android:id="@+id/tvSubject"
+        android:id="@+id/tvSubject_Item_Teacher_List"
         style="@style/TextViewGrey_10sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,13 +45,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
-        app:layout_constraintTop_toBottomOf="@+id/tvTeacherName"
+        app:layout_constraintStart_toEndOf="@+id/ivProfilePic_Item_Teacher_List"
+        app:layout_constraintTop_toBottomOf="@+id/tvTeacherName_Item_Teacher_List"
         app:layout_constraintVertical_bias="0.0"
         tools:text="Operating System" />
 
     <ImageView
-        android:id="@+id/ivArrow"
+        android:id="@+id/ivArrow_Item_Teacher_List"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="38dp"
@@ -65,7 +65,7 @@
         app:srcCompat="@drawable/left_arrow_icon" />
 
     <ImageView
-        android:id="@+id/ivStar1"
+        android:id="@+id/ivStar1_Item_Teacher_List"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -73,47 +73,47 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvSubject"
-        app:layout_constraintTop_toBottomOf="@+id/tvSubject"
+        app:layout_constraintStart_toStartOf="@+id/tvSubject_Item_Teacher_List"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubject_Item_Teacher_List"
         app:srcCompat="@drawable/full_star_icon" />
 
     <ImageView
-        android:id="@+id/ivStar2"
+        android:id="@+id/ivStar2_Item_Teacher_List"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivStar1"
-        app:layout_constraintStart_toEndOf="@+id/ivStar1"
-        app:layout_constraintTop_toTopOf="@+id/ivStar1"
+        app:layout_constraintBottom_toBottomOf="@+id/ivStar1_Item_Teacher_List"
+        app:layout_constraintStart_toEndOf="@+id/ivStar1_Item_Teacher_List"
+        app:layout_constraintTop_toTopOf="@+id/ivStar1_Item_Teacher_List"
         app:srcCompat="@drawable/full_star_icon" />
 
     <ImageView
-        android:id="@+id/ivStar3"
+        android:id="@+id/ivStar3_Item_Teacher_List"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivStar2"
-        app:layout_constraintStart_toEndOf="@+id/ivStar2"
-        app:layout_constraintTop_toTopOf="@+id/ivStar2"
+        app:layout_constraintBottom_toBottomOf="@+id/ivStar2_Item_Teacher_List"
+        app:layout_constraintStart_toEndOf="@+id/ivStar2_Item_Teacher_List"
+        app:layout_constraintTop_toTopOf="@+id/ivStar2_Item_Teacher_List"
         app:srcCompat="@drawable/full_star_icon" />
 
     <ImageView
-        android:id="@+id/ivStar4"
+        android:id="@+id/ivStar4_Item_Teacher_List"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivStar3"
-        app:layout_constraintStart_toEndOf="@+id/ivStar3"
-        app:layout_constraintTop_toTopOf="@+id/ivStar3"
+        app:layout_constraintBottom_toBottomOf="@+id/ivStar3_Item_Teacher_List"
+        app:layout_constraintStart_toEndOf="@+id/ivStar3_Item_Teacher_List"
+        app:layout_constraintTop_toTopOf="@+id/ivStar3_Item_Teacher_List"
         app:srcCompat="@drawable/full_star_icon" />
 
     <ImageView
-        android:id="@+id/ivStar5"
+        android:id="@+id/ivStar5_Item_Teacher_List"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivStar4"
-        app:layout_constraintStart_toEndOf="@+id/ivStar4"
-        app:layout_constraintTop_toTopOf="@+id/ivStar4"
+        app:layout_constraintBottom_toBottomOf="@+id/ivStar4_Item_Teacher_List"
+        app:layout_constraintStart_toEndOf="@+id/ivStar4_Item_Teacher_List"
+        app:layout_constraintTop_toTopOf="@+id/ivStar4_Item_Teacher_List"
         app:srcCompat="@drawable/full_star_icon" />
 </androidx.constraintlayout.widget.ConstraintLayout>

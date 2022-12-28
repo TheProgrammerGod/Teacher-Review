@@ -64,4 +64,11 @@
         <item name="android:textSize">10sp</item>
     </style>
 
+    <style name="TextViewWhite_24sp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">Inter</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

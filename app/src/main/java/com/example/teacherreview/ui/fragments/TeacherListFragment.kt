@@ -57,9 +57,9 @@ class TeacherListFragment : Fragment() {
 
     // Function which setup all the required Instances for the Fragment !
     private fun setupInstances(){
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext() , LinearLayoutManager.VERTICAL , false)
+        binding.recyclerViewTeacherList.layoutManager = LinearLayoutManager(requireContext() , LinearLayoutManager.VERTICAL , false)
         myAdapter = TeacherListAdapter(requireContext())
-        binding.recyclerView.adapter = myAdapter
+        binding.recyclerViewTeacherList.adapter = myAdapter
     }
 
     //Testing :-----------------------------------------------------------------------------------------------------
@@ -67,7 +67,6 @@ class TeacherListFragment : Fragment() {
         val items = ArrayList<Tester>()
         for(i in 1..100){
             val item = Tester("Anirban Basak$i" , "Object Oriented Prog." , R.drawable.test_image_icon , 5.0)
-            d("Main Activity" , item.toString())
             items.add(item)
         }
         myAdapter.updateData(items)

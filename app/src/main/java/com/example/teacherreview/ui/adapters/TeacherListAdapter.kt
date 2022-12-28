@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teacherreview.R
-import com.example.teacherreview.models.ReviewData
 import com.example.teacherreview.ui.fragments.Tester
 
 class TeacherListAdapter(private val context: Context) : RecyclerView.Adapter<TeacherListAdapter.TeacherListViewHolder>() {
@@ -20,14 +19,14 @@ class TeacherListAdapter(private val context: Context) : RecyclerView.Adapter<Te
     inner class TeacherListViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
 
         // Testing :- The real function body is yet to be implemented !!-----------------------------------
-        val tvTeacherName : TextView = itemView.findViewById(R.id.tvTeacherName)
-        val tvSubject : TextView = itemView.findViewById(R.id.tvSubject)
-        val ivProfilePic : ImageView = itemView.findViewById(R.id.ivProfilePic)
-        val ivStar1 : ImageView = itemView.findViewById(R.id.ivStar1)
-        val ivStar2 : ImageView = itemView.findViewById(R.id.ivStar2)
-        val ivStar3 : ImageView = itemView.findViewById(R.id.ivStar3)
-        val ivStar4 : ImageView = itemView.findViewById(R.id.ivStar4)
-        val ivStar5 : ImageView = itemView.findViewById(R.id.ivStar5)
+        val tvTeacherName : TextView = itemView.findViewById(R.id.tvTeacherName_Item_Teacher_List)
+        val tvSubject : TextView = itemView.findViewById(R.id.tvSubject_Item_Teacher_List)
+        val ivProfilePic : ImageView = itemView.findViewById(R.id.ivProfilePic_Item_Teacher_List)
+        val ivStar1 : ImageView = itemView.findViewById(R.id.ivStar1_Item_Teacher_List)
+        val ivStar2 : ImageView = itemView.findViewById(R.id.ivStar2_Item_Teacher_List)
+        val ivStar3 : ImageView = itemView.findViewById(R.id.ivStar3_Item_Teacher_List)
+        val ivStar4 : ImageView = itemView.findViewById(R.id.ivStar4_Item_Teacher_List)
+        val ivStar5 : ImageView = itemView.findViewById(R.id.ivStar5_Item_Teacher_List)
 
         //TODO :- Implement the Real function Body as the above is just for testing purposes !! :------------------------
     }
@@ -44,7 +43,7 @@ class TeacherListAdapter(private val context: Context) : RecyclerView.Adapter<Te
         holder.tvTeacherName.text = reviewDataCard[position].name
         holder.tvSubject.text = reviewDataCard[position].sub
 
-        //TODO :- Implement the Real Function Body as the above is just for Testing purose !! :--------------------------
+        //TODO :- Implement the Real Function Body as the above is just for Testing purpose !! :--------------------------
     }
 
     override fun getItemCount(): Int {
