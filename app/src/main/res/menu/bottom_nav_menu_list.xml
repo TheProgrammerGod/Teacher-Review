@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/studentProfileFragment"
-        android:icon="@drawable/ic_profile"
-        android:title="@string/profile" />
-    <item
         android:id="@+id/teacherListFragment"
-        android:icon="@drawable/ic_rate_review"
+        android:icon="@drawable/list_icon"
         android:title="@string/reviews" />
     <item
         android:id="@+id/studentReviewHistoryFragment"
-        android:icon="@drawable/ic_history"
+        android:icon="@drawable/history_nav_bar_icon"
         android:title="@string/history" />
+    <item
+        android:id="@+id/studentProfileFragment"
+        android:icon="@drawable/profile_icon"
+        android:title="@string/profile" />
 </menu>
