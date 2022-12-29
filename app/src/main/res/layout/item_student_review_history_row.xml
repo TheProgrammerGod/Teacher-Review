@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="23dp"
+    android:backgroundTint="@color/dark_grey"
+    app:cardCornerRadius="16dp"
+    android:elevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivProfilePic_Item_Review_History"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/test_image_icon" />
+
+        <TextView
+            android:id="@+id/tvTeacherName_Item_Review_History"
+            style="@style/TextViewYellow_20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/ivProfilePic_Item_Review_History"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Dr. BKL ADD" />
+
+        <ImageView
+            android:id="@+id/ivStar1_Item_Review_History"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/ivProfilePic_Item_Review_History"
+            app:layout_constraintTop_toBottomOf="@+id/tvTeacherName_Item_Review_History"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/full_star_icon" />
+
+        <ImageView
+            android:id="@+id/ivStar2_Item_Review_History"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivStar1_Item_Review_History"
+            app:layout_constraintStart_toEndOf="@+id/ivStar1_Item_Review_History"
+            app:layout_constraintTop_toTopOf="@+id/ivStar1_Item_Review_History"
+            app:srcCompat="@drawable/full_star_icon" />
+
+        <ImageView
+            android:id="@+id/ivStar3_Item_Review_History"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivStar2_Item_Review_History"
+            app:layout_constraintStart_toEndOf="@+id/ivStar2_Item_Review_History"
+            app:layout_constraintTop_toTopOf="@+id/ivStar2_Item_Review_History"
+            app:srcCompat="@drawable/full_star_icon" />
+
+        <ImageView
+            android:id="@+id/ivStar4_Item_Review_History"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivStar3_Item_Review_History"
+            app:layout_constraintStart_toEndOf="@+id/ivStar3_Item_Review_History"
+            app:layout_constraintTop_toTopOf="@+id/ivStar3_Item_Review_History"
+            app:srcCompat="@drawable/full_star_icon" />
+
+        <ImageView
+            android:id="@+id/ivStar5_Item_Review_History"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivStar4_Item_Review_History"
+            app:layout_constraintStart_toEndOf="@+id/ivStar4_Item_Review_History"
+            app:layout_constraintTop_toTopOf="@+id/ivStar4_Item_Review_History"
+            app:srcCompat="@drawable/full_star_icon" />
+
+        <TextView
+            android:id="@+id/tvReview_Item_Review_History"
+            style="@style/TextViewWhite_18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="9dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivStar1_Item_Review_History"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

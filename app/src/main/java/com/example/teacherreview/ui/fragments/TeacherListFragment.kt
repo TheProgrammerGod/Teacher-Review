@@ -8,15 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.teacherreview.R
 import com.example.teacherreview.databinding.FragmentTeacherListBinding
+import com.example.teacherreview.ui.adapters.TeacherListAdapter
 import com.example.teacherreview.viewmodels.SharedViewModel
 
 class TeacherListFragment : Fragment() {
 
     private lateinit var binding :FragmentTeacherListBinding
-
     // Creating the SharedViewModel Instance
     private val sharedViewModel : SharedViewModel by activityViewModels()
+    // Creating the Adapter for the RecyclerView
+    private lateinit var  myAdapter : TeacherListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +34,11 @@ class TeacherListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Setting up the RecyclerView Instances and all the required Instances !!
+        setupInstances()
 
+        // Testing :--------------------------------------------------------------------------------------------
+        startTesting()
 
 
         //Observable if the Teacher List changes or user hits any Sort options
@@ -46,4 +54,27 @@ class TeacherListFragment : Fragment() {
         //Initially Taking the Values once so the Values comes to the RecyclerView
         sharedViewModel.getTeacherReviewList()
     }
+
+    // Function which setup all the required Instances for the Fragment !
+    private fun setupInstances(){
+        binding.recyclerViewTeacherList.layoutManager = LinearLayoutManager(requireContext() , LinearLayoutManager.VERTICAL , false)
+        myAdapter = TeacherListAdapter(requireContext())
+        binding.recyclerViewTeacherList.adapter = myAdapter
+    }
+
+    //Testing :-----------------------------------------------------------------------------------------------------
+    private fun startTesting(){
+        val items = ArrayList<Tester>()
+        for(i in 1..100){
+            val item = Tester("Anirban Basak$i" , "Object Oriented Prog." , R.drawable.test_image_icon , 5.0)
+            items.add(item)
+        }
+        myAdapter.updateData(items)
+    }
 }
+//Testing :-------------------------------------------------------------------------------------------------
+data class Tester(val name : String ,
+                  val sub : String ,
+                  val prPic : Int ,
+                  val starRating : Double
+                  )

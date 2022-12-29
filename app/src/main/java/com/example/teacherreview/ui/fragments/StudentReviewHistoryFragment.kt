@@ -1,21 +1,26 @@
 package com.example.teacherreview.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.teacherreview.R
 import com.example.teacherreview.databinding.FragmentStudentReviewHistoryBinding
+import com.example.teacherreview.ui.adapters.StudentReviewHistoryAdapter
 import com.example.teacherreview.viewmodels.SharedViewModel
 
 class StudentReviewHistoryFragment : Fragment() {
 
     private lateinit var binding : FragmentStudentReviewHistoryBinding
-
     // Initializing the SharedViewModel
     private val sharedViewModel : SharedViewModel by activityViewModels()
+    // Initializing the adapter for RecyclerView
+    private lateinit var myAdapter : StudentReviewHistoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +34,13 @@ class StudentReviewHistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Setting up the RecyclerView Instances and all the required Instances !!
+        setupInstance()
+
+        // Testing :--------------------------------------------------------------------------------------------
+        startTesting()
+
+
         //Observable to observe for changes in the ReviewList
         sharedViewModel.myTeacherList.observe(viewLifecycleOwner){ response ->
             if(response.isSuccessful){
@@ -40,5 +52,22 @@ class StudentReviewHistoryFragment : Fragment() {
 
         //Initially Taking the Values to update the RecyclerView
         sharedViewModel.getStudentReviewList(1223123) // TODO :- Student Roll in the parameter
+    }
+
+    // Function which setup all the required Instances for the Fragment !
+    private fun setupInstance() {
+        myAdapter = StudentReviewHistoryAdapter(requireContext())
+        binding.recyclerViewReviewHistory.layoutManager = LinearLayoutManager(requireContext() , LinearLayoutManager.VERTICAL , false)
+        binding.recyclerViewReviewHistory.adapter = myAdapter
+    }
+
+    //Testing :-----------------------------------------------------------------------------------------------------
+    private fun startTesting(){
+        val items = ArrayList<Tester>()
+        for(i in 1..100){
+            val item = Tester("Anirban Basak$i" , "Object Oriented Prog." , R.drawable.test_image_icon , 5.0)
+            items.add(item)
+        }
+        myAdapter.updateData(items)
     }
 }

@@ -13,11 +13,62 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="Theme.TeacherReview.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+
+    <!--Custom Themes and Styles-->
+    <style name="Theme.MyCustomTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorPrimaryVariant">@color/black</item>
     </style>
-    <style name="Theme.TeacherReview.AppBarOverlay"
-        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="Theme.TeacherReview.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="TextViewBlue_20sp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="fontFamily">Inter</item>
+    </style>
+
+    <style name="TextViewWhite_18sp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">Inter</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextViewYellow_20sp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/yellow</item>
+        <item name="fontFamily">Inter</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextViewYellow_24sp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/yellow</item>
+        <item name="fontFamily">Inter</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ChipGrey_14sp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">Inter</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:minHeight">25dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginEnd">17dp</item>
+    </style>
+
+    <style name="TextViewGrey_10sp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/grey</item>
+        <item name="fontFamily">Inter</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="TextViewWhite_24sp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">Inter</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
