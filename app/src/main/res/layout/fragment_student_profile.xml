@@ -1,14 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.StudentProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/light_black">
 
+        <TextView
+            android:id="@+id/tvTitle_Profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="@string/profile"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivProfile_Picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="57dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/test_icon_02"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle_Profile"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/yellow"
+            app:strokeWidth="1dp" />
+
+        <TextView
+            android:id="@+id/tvStudent_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="31dp"
+            android:fontFamily="@font/inter"
+            android:textColor="@color/yellow"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivProfile_Picture"
+            android:text="Johny Boi" />
+
+        <TextView
+            android:id="@+id/tvRoll_Number"
+            style="@style/ProfileTextViewFields"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:drawableStart="@drawable/face_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvStudent_Name"
+            android:text="21051592" />
+
+        <TextView
+            android:id="@+id/tvEmail"
+            style="@style/ProfileTextViewFields"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:drawableStart="@drawable/email"
+            android:text="210XXXXX@kiit.ac.in"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRoll_Number" />
+
+        <TextView
+            android:id="@+id/tvSemester"
+            style="@style/ProfileTextViewFields"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:drawableStart="@drawable/mortarboard"
+            android:text="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSign_Out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="43dp"
+            android:backgroundTint="@color/yellow"
+            android:fontFamily="@font/inter"
+            android:padding="16dp"
+            android:text="Sign Out"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:icon="@drawable/logout"
+            app:iconGravity="start"
+            app:iconPadding="22dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSemester" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
