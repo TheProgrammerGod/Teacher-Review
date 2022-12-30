@@ -9,24 +9,32 @@
         android:id="@+id/teacherListFragment"
         android:name="com.example.teacherreview.ui.fragments.TeacherListFragment"
         android:label="fragment_teacher_list"
-        tools:layout="@layout/fragment_teacher_list" >
+        tools:layout="@layout/fragment_teacher_list">
         <action
-            android:id="@+id/action_teacherListFragment_to_giveTeacherReviewFragment"
-            app:destination="@id/giveTeacherReviewFragment" />
-        <action
-            android:id="@+id/action_teacherListFragment_to_showTeacherReviewFragment"
-            app:destination="@id/showTeacherReviewFragment" />
+            android:id="@+id/action_teacherListFragment_to_TeacherReviewDetailsFragment"
+            app:destination="@id/TeacherReviewDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/giveTeacherReviewFragment"
         android:name="com.example.teacherreview.ui.fragments.GiveTeacherReviewFragment"
         android:label="fragment_give_teacher_review"
-        tools:layout="@layout/fragment_give_teacher_review" />
+        tools:layout="@layout/fragment_give_teacher_review">
+        <action
+            android:id="@+id/action_giveTeacherReviewFragment_to_showTeacherReviewFragment"
+            app:destination="@id/TeacherReviewDetailsFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/showTeacherReviewFragment"
-        android:name="com.example.teacherreview.ui.fragments.ShowTeacherReviewFragment"
+        android:id="@+id/TeacherReviewDetailsFragment"
+        android:name="com.example.teacherreview.ui.fragments.TeacherReviewDetailsFragment"
         android:label="fragment_show_teacher_review"
-        tools:layout="@layout/fragment_show_teacher_review" />
+        tools:layout="@layout/fragment_teacher_review_details">
+        <action
+            android:id="@+id/action_TeacherReviewDetailsFragment_to_giveTeacherReviewFragment"
+            app:destination="@id/giveTeacherReviewFragment" />
+        <action
+            android:id="@+id/action_showTeacherReviewFragment_to_teacherListFragment"
+            app:destination="@id/teacherListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/studentProfileFragment"
         android:name="com.example.teacherreview.ui.fragments.StudentProfileFragment"

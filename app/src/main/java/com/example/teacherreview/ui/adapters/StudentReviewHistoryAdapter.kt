@@ -8,10 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teacherreview.R
-import com.example.teacherreview.models.ReviewData
 import com.example.teacherreview.ui.fragments.Tester
 
-class StudentReviewHistoryAdapter(private val context : Context) : RecyclerView.Adapter<StudentReviewHistoryAdapter.StudentReviewHistoryViewHolder>() {
+class StudentReviewHistoryAdapter : RecyclerView.Adapter<StudentReviewHistoryAdapter.StudentReviewHistoryViewHolder>() {
 
     //    private var reviewList : List <ReviewData> = emptyList()
                         //Testing The real Variable is the Above Line --------------------------------------------
@@ -32,7 +31,7 @@ class StudentReviewHistoryAdapter(private val context : Context) : RecyclerView.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentReviewHistoryViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_student_review_history_row , parent , false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_student_review_history_row , parent , false)
         return StudentReviewHistoryViewHolder(view)
     }
 

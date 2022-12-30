@@ -56,7 +56,7 @@ class StudentReviewHistoryFragment : Fragment() {
 
     // Function which setup all the required Instances for the Fragment !
     private fun setupInstance() {
-        myAdapter = StudentReviewHistoryAdapter(requireContext())
+        myAdapter = StudentReviewHistoryAdapter()
         binding.recyclerViewReviewHistory.layoutManager = LinearLayoutManager(requireContext() , LinearLayoutManager.VERTICAL , false)
         binding.recyclerViewReviewHistory.adapter = myAdapter
     }
