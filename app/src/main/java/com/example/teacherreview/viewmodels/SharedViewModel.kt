@@ -31,7 +31,7 @@ class SharedViewModel : ViewModel() {
         }
     }
 
-    // Function calls teh repository and fetches data in ascending order of
+    // Function calls the repository and fetches data in ascending order of
     fun getTeachersReviewListInDescending(){
         viewModelScope.launch {
             // TODO :- Ask the Repository to fetch the data in sorted Order
@@ -42,6 +42,13 @@ class SharedViewModel : ViewModel() {
     fun getStudentReviewList(roll : Int){
         viewModelScope.launch {
             // TODO :- Ask the Repository to fetch data regarding student reviews
+        }
+    }
+
+    //Function calls repository and fetches the details of the Student
+    fun getStudentDetail(){
+        viewModelScope.launch {
+            // TODO :- Ask the Repository to fetch the student detail
         }
     }
 }
