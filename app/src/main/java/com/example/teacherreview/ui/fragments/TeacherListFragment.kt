@@ -8,13 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teacherreview.R
 import com.example.teacherreview.databinding.FragmentTeacherListBinding
+import com.example.teacherreview.ui.adapters.RecyclerViewOnItemClick
 import com.example.teacherreview.ui.adapters.TeacherListAdapter
 import com.example.teacherreview.viewmodels.SharedViewModel
 
-class TeacherListFragment : Fragment() {
+/**
+ * Implementing the RecyclerViewOnItemClick interface here so that we can implement all the code
+ * in our fragment Class since its related to calling different Fragment and related to UI stuffs
+ * which are handled at out Fragment rather than Adapter class
+  */
+
+class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
 
     private lateinit var binding :FragmentTeacherListBinding
     // Creating the SharedViewModel Instance
@@ -25,7 +33,7 @@ class TeacherListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentTeacherListBinding.inflate(inflater , container , false)
         return binding.root
@@ -58,8 +66,21 @@ class TeacherListFragment : Fragment() {
     // Function which setup all the required Instances for the Fragment !
     private fun setupInstances(){
         binding.recyclerViewTeacherList.layoutManager = LinearLayoutManager(requireContext() , LinearLayoutManager.VERTICAL , false)
-        myAdapter = TeacherListAdapter(requireContext())
+
+        // Here this refers to the RecyclerViewOnItemClick Interface class which is implemented below this function
+        myAdapter = TeacherListAdapter(this)
         binding.recyclerViewTeacherList.adapter = myAdapter
+    }
+
+    // Function which will be invoked when the RecyclerView Item is Clicked
+    override fun onItemClick(position: Int) {
+
+        // Changing Fragment to the TeacherReviewDetails Fragment
+        val navController = findNavController()
+        navController.navigate(R.id.action_teacherListFragment_to_TeacherReviewDetailsFragment)
+
+        // This toast is for testing Purposes :---------------------------------------------------------------------
+        Toast.makeText(requireContext() , "Teacher Name : $position" , Toast.LENGTH_SHORT).show()
     }
 
     //Testing :-----------------------------------------------------------------------------------------------------

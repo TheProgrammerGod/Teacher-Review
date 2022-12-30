@@ -71,4 +71,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TextViewWhite_26sp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">Inter</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

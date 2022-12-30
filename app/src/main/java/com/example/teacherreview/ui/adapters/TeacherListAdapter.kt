@@ -1,6 +1,5 @@
 package com.example.teacherreview.ui.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.teacherreview.R
 import com.example.teacherreview.ui.fragments.Tester
 
-class TeacherListAdapter(private val context: Context) : RecyclerView.Adapter<TeacherListAdapter.TeacherListViewHolder>() {
+class TeacherListAdapter(private val myListener : RecyclerViewOnItemClick) : RecyclerView.Adapter<TeacherListAdapter.TeacherListViewHolder>() {
 
 //    private var reviewDataCard : List<ReviewData> = emptyList()
-                //Testing The real Variable is the Above Line --------------------------------------------
+                //Testing The real Variable is in the Above Line --------------------------------------------
     private var reviewDataCard : List<Tester> = emptyList()
 
-    inner class TeacherListViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+    // This class extends the onClickListener class which implements the function for handling click events
+    inner class TeacherListViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) , View.OnClickListener{
 
         // Testing :- The real function body is yet to be implemented !!-----------------------------------
         val tvTeacherName : TextView = itemView.findViewById(R.id.tvTeacherName_Item_Teacher_List)
@@ -29,10 +29,28 @@ class TeacherListAdapter(private val context: Context) : RecyclerView.Adapter<Te
         val ivStar5 : ImageView = itemView.findViewById(R.id.ivStar5_Item_Teacher_List)
 
         //TODO :- Implement the Real function Body as the above is just for testing purposes !! :------------------------
+
+        // This init block defines the onClickListener on the View
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        // This function is called when a certain item of a recyclerView is CLicked
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if(position != RecyclerView.NO_POSITION) {
+                /**
+                 * We are calling our custom made RecyclerViewOnItemClick class which have this function
+                 * implemented on the fragment and the rest code is handled there rather than in the
+                 * adapter class since this part is related to UI and switching Fragment
+                 */
+                myListener.onItemClick(position)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeacherListViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_teacher_list_row , parent , false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_teacher_list_row , parent , false)
         return TeacherListViewHolder(view)
     }
 

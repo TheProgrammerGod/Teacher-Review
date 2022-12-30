@@ -18,4 +18,8 @@
     <string name="teacher_s_list">TEACHER\'S LIST</string>
     <string name="dms">DMS</string>
     <string name="review_history">Review History</string>
+    <string name="teaching_rating">Teaching Rating</string>
+    <string name="marks_rating">Marks Rating</string>
+    <string name="attendance_rating">Attendance Rating</string>
+    <string name="profile_pic_of_user">Profile Pic of User</string>
 </resources>
