@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="53dp"
                 android:contentDescription="@string/profile_pic_of_user"
+                android:scaleType="centerCrop"
                 android:src="@drawable/test_icon_02"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -105,6 +106,7 @@
                             android:id="@+id/iv_star1_teaching_Teacher_Review_Details"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/zero_star_icon" />
 
                         <ImageView
@@ -112,6 +114,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/zero_star_icon" />
 
                         <ImageView
@@ -119,6 +122,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/zero_star_icon" />
 
                         <ImageView
@@ -126,6 +130,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/zero_star_icon" />
 
                         <ImageView
@@ -133,6 +138,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/zero_star_icon" />
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -184,6 +190,7 @@
                             android:id="@+id/iv_star1_marks_Teacher_Review_Details"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/zero_star_icon" />
 
                         <ImageView
@@ -191,6 +198,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/zero_star_icon" />
 
                         <ImageView
@@ -198,6 +206,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/zero_star_icon" />
 
                         <ImageView
@@ -205,6 +214,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/zero_star_icon" />
 
                         <ImageView
@@ -212,6 +222,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/zero_star_icon" />
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -263,6 +274,7 @@
                             android:id="@+id/iv_star1_attendance_Teacher_Review_Details"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/zero_star_icon" />
 
                         <ImageView
@@ -270,6 +282,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/zero_star_icon" />
 
                         <ImageView
@@ -277,6 +290,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/zero_star_icon" />
 
                         <ImageView
@@ -284,6 +298,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/zero_star_icon" />
 
                         <ImageView
@@ -291,6 +306,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/zero_star_icon" />
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
