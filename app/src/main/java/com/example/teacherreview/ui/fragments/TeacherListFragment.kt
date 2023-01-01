@@ -14,6 +14,7 @@ import com.example.teacherreview.R
 import com.example.teacherreview.databinding.FragmentTeacherListBinding
 import com.example.teacherreview.ui.adapters.RecyclerViewOnItemClick
 import com.example.teacherreview.ui.adapters.TeacherListAdapter
+import com.example.teacherreview.utils.TestRunner.Companion.startTesting
 import com.example.teacherreview.viewmodels.SharedViewModel
 
 /**
@@ -46,7 +47,7 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
         setupInstances()
 
         // Testing :--------------------------------------------------------------------------------------------
-        startTesting()
+        myAdapter.updateData(startTesting())
 
 
         //Observable if the Teacher List changes or user hits any Sort options
@@ -82,20 +83,4 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
         // This toast is for testing Purposes :---------------------------------------------------------------------
         Toast.makeText(requireContext() , "Teacher Name : $position" , Toast.LENGTH_SHORT).show()
     }
-
-    //Testing :-----------------------------------------------------------------------------------------------------
-    private fun startTesting(){
-        val items = ArrayList<Tester>()
-        for(i in 1..100){
-            val item = Tester("Anirban Basak$i" , "Object Oriented Prog." , R.drawable.test_image_icon , 5.0)
-            items.add(item)
-        }
-        myAdapter.updateData(items)
-    }
 }
-//Testing :-------------------------------------------------------------------------------------------------
-data class Tester(val name : String ,
-                  val sub : String ,
-                  val prPic : Int ,
-                  val starRating : Double
-                  )

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teacherreview.R
 import com.example.teacherreview.databinding.FragmentTeacherReviewDetailsBinding
 import com.example.teacherreview.ui.adapters.TeacherReviewDetailsAdapter
+import com.example.teacherreview.utils.TestRunner.Companion.startTesting
 
 class TeacherReviewDetailsFragment : Fragment() {
 
@@ -37,17 +38,9 @@ class TeacherReviewDetailsFragment : Fragment() {
         myAdapter = TeacherReviewDetailsAdapter()
         binding.recyclerViewTeacherDetails.layoutManager = LinearLayoutManager(requireContext() , LinearLayoutManager.VERTICAL , false)
         binding.recyclerViewTeacherDetails.adapter = myAdapter
-        startTesting()
-    }
 
-    //Testing :-----------------------------------------------------------------------------------------------------
-    private fun startTesting(){
-        val items = ArrayList<Tester>()
-        for(i in 1..100){
-            val item = Tester("Anirban Basak$i" , "Object Oriented Prog." , R.drawable.test_image_icon , 5.0)
-            items.add(item)
-        }
-        myAdapter.updateData(items)
+        // Testing :-------------------------------------------------------------------------------------------------
+        myAdapter.updateData(startTesting())
     }
 }
 /*TODO :-- The viewModel is not yet Implemented and the recyclerView instance
