@@ -3,34 +3,19 @@ package com.example.teacherreview.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teacherreview.R
-import com.example.teacherreview.utils.Tester
+import com.example.teacherreview.databinding.ItemTeacherListRowBinding
+import com.example.teacherreview.models.IndividualFacultyData
 
 class TeacherListAdapter(private val myListener : RecyclerViewOnItemClick) : RecyclerView.Adapter<TeacherListAdapter.TeacherListViewHolder>() {
 
-//    private var reviewDataCard : List<ReviewData> = emptyList()
-                //Testing The real Variable is in the Above Line --------------------------------------------
-    private var reviewDataCard : List<Tester> = emptyList()
+    private var myTeacherList : List<IndividualFacultyData> = emptyList()
 
     // This class extends the onClickListener class which implements the function for handling click events
-    inner class TeacherListViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) , View.OnClickListener{
+    inner class TeacherListViewHolder(val binding: ItemTeacherListRowBinding) : RecyclerView.ViewHolder(binding.root) , View.OnClickListener{
 
-        // Testing :- The real function body is yet to be implemented !!-----------------------------------
-        val tvTeacherName : TextView = itemView.findViewById(R.id.tvTeacherName_Item_Teacher_List)
-        val tvSubject : TextView = itemView.findViewById(R.id.tvSubject_Item_Teacher_List)
-        val ivProfilePic : ImageView = itemView.findViewById(R.id.ivProfilePic_Item_Teacher_List)
-        val ivStar1 : ImageView = itemView.findViewById(R.id.ivStar1_Item_Teacher_List)
-        val ivStar2 : ImageView = itemView.findViewById(R.id.ivStar2_Item_Teacher_List)
-        val ivStar3 : ImageView = itemView.findViewById(R.id.ivStar3_Item_Teacher_List)
-        val ivStar4 : ImageView = itemView.findViewById(R.id.ivStar4_Item_Teacher_List)
-        val ivStar5 : ImageView = itemView.findViewById(R.id.ivStar5_Item_Teacher_List)
-
-        //TODO :- Implement the Real function Body as the above is just for testing purposes !! :------------------------
-
-        // This init block defines the onClickListener on the View
+        // Initializing all the required Variables and onClick Events on the init block
         init {
             itemView.setOnClickListener(this)
         }
@@ -50,29 +35,75 @@ class TeacherListAdapter(private val myListener : RecyclerViewOnItemClick) : Rec
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeacherListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_teacher_list_row , parent , false)
-        return TeacherListViewHolder(view)
+        val binding = ItemTeacherListRowBinding.inflate(LayoutInflater.from(parent.context) , parent , false)
+        return TeacherListViewHolder(binding)
     }
+
 
     override fun onBindViewHolder(holder: TeacherListViewHolder, position: Int) {
 
-        //Testing :- The real function is yet to be Implemented
-        holder.ivProfilePic.setImageResource( reviewDataCard[position].prPic)
-        holder.tvTeacherName.text = reviewDataCard[position].name
-        holder.tvSubject.text = reviewDataCard[position].sub
+        // TODO :- Profile Pic
+        holder.binding.tvTeacherNameItemTeacherList.text = myTeacherList[position].name
+        // TODO :- Subject Name
+        val point = myTeacherList[position].avgRating
 
-        //TODO :- Implement the Real Function Body as the above is just for Testing purpose !! :--------------------------
+        if(point == 5.0){
+            holder.binding.ivStar1ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar2ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar3ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar4ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar5ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+        }
+        else if(point >= 4.5){
+            holder.binding.ivStar1ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar2ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar3ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar4ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar5ItemTeacherList.setImageResource(R.drawable.half_star_icon)
+        }
+        else if(point >= 4.0){
+            holder.binding.ivStar1ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar2ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar3ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar4ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+        }
+        else if(point >= 3.5){
+            holder.binding.ivStar1ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar2ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar3ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar4ItemTeacherList.setImageResource(R.drawable.half_star_icon)
+        }
+        else if(point >= 3.0){
+            holder.binding.ivStar1ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar2ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar3ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+        }
+        else if(point >= 2.5){
+            holder.binding.ivStar1ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar2ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar3ItemTeacherList.setImageResource(R.drawable.half_star_icon)
+        }
+        else if(point >= 2.0){
+            holder.binding.ivStar1ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar2ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+        }
+        else if(point >= 1.5){
+            holder.binding.ivStar1ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+            holder.binding.ivStar2ItemTeacherList.setImageResource(R.drawable.half_star_icon)
+        }
+        else if(point >= 1.0)
+            holder.binding.ivStar1ItemTeacherList.setImageResource(R.drawable.full_star_icon)
+        else if(point >= 0.5)
+            holder.binding.ivStar1ItemTeacherList.setImageResource(R.drawable.half_star_icon)
     }
 
     override fun getItemCount(): Int {
-         return reviewDataCard.size
+         return myTeacherList.size
     }
 
     // This Function Updates the data of the RecyclerView
-//    fun updateData(newList : List<ReviewData>){
-    //Testing , The real Function prototype is the above Line
-    fun updateData(newList : List<Tester>){
-        reviewDataCard = newList
+    fun updateData(newList : List<IndividualFacultyData>){
+        myTeacherList = newList
         notifyDataSetChanged()
     }
 }
