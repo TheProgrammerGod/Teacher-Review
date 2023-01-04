@@ -1,9 +1,11 @@
 package com.example.teacherreview.models
 
+import com.google.gson.annotations.SerializedName
+
 data class ReviewData(
-    val _id : String ,
-    val review : String? ,
-    val rating : RatingData? ,
-    val subject : SubjectsData? ,
-    val faculty : IndividualFacultyData
+    val total : Int ,
+    val limit : Int ,
+    val skip : Int ,
+    @SerializedName("data")
+    val individualReviewData : List<IndividualReviewData>
 )

@@ -1,7 +1,6 @@
 package com.example.teacherreview.ui.fragments
 
 import android.os.Bundle
-import android.util.Log.d
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +23,7 @@ import com.example.teacherreview.viewmodels.SharedViewModel
 
 class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
 
+    // Variable made to update the ,
     private lateinit var binding :FragmentTeacherListBinding
     // Creating the SharedViewModel Instance
     private val sharedViewModel : SharedViewModel by activityViewModels()
@@ -48,7 +48,6 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
         //Observable if the Teacher List changes or user hits any Sort options
         sharedViewModel.myTeacherList.observe(viewLifecycleOwner){ response ->
             if(response.isSuccessful){
-                d("Main Activity" , response.body().toString())
                 myAdapter.updateData(response.body()!!.individualFacultyData)
             }
             else{
@@ -71,13 +70,22 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
     }
 
     // Function which will be invoked when the RecyclerView Item is Clicked
-    override fun onItemClick(position: Int) {
+    override fun onItemClick(facultyId : String) {
+
+
+
+
+        sharedViewModel.getDetailedReviews(facultyId)
+
+
+
+
 
         // Changing Fragment to the TeacherReviewDetails Fragment
         val navController = findNavController()
         navController.navigate(R.id.action_teacherListFragment_to_TeacherReviewDetailsFragment)
 
         // This toast is for testing Purposes :---------------------------------------------------------------------
-        Toast.makeText(requireContext() , "Teacher Name : $position" , Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext() , facultyId, Toast.LENGTH_SHORT).show()
     }
 }

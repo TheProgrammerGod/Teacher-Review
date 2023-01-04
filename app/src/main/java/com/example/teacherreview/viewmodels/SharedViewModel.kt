@@ -1,10 +1,12 @@
 package com.example.teacherreview.viewmodels
 
+import android.util.Log.d
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.teacherreview.models.FacultiesData
+import com.example.teacherreview.models.ReviewData
 import com.example.teacherreview.repository.Repository
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -16,15 +18,23 @@ class SharedViewModel : ViewModel() {
 
     private var myRepository = Repository()
 
-    init{
-        // TODO :- Make a repository Instance and calls the API once to fetch the data
-    }
+    private val _myDetailedReviewList : MutableLiveData<Response<ReviewData>> = MutableLiveData()
+    val myDetailedReviewList : LiveData<Response<ReviewData>>
+        get() = _myDetailedReviewList
 
     // Function calls repository and fetches data from API
     fun getTeacherList(){
         viewModelScope.launch {
             val response = myRepository.getTeacherList()
             _myTeacherList.value = response
+        }
+    }
+
+    // This calls the API and fetches detailed Reviews of a Teachers
+    fun getDetailedReviews(facultyId : String){
+        viewModelScope.launch {
+            val response = myRepository.getDetailedReviews(facultyId = facultyId)
+            _myDetailedReviewList.value = response
         }
     }
 

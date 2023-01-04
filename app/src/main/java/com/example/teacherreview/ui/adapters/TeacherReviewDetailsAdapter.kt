@@ -1,44 +1,48 @@
 package com.example.teacherreview.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teacherreview.R
-import com.example.teacherreview.utils.Tester
+import com.example.teacherreview.databinding.ItemTeacherReviewDetailsRowBinding
+import com.example.teacherreview.models.IndividualReviewData
 
 class TeacherReviewDetailsAdapter : RecyclerView.Adapter<TeacherReviewDetailsAdapter.ViewHolder>() {
 
-    //    private var reviewList : List <ReviewData> = emptyList()
-    //Testing The real Variable is in the Above Line --------------------------------------------
-    private var reviewList : List <Tester> = emptyList()
+    private var reviewList : List <IndividualReviewData> = emptyList()
 
-    inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        // Testing :- The real function body is yet to be implemented !!-----------------------------------
-        val ivProfilePic : ImageView = itemView.findViewById(R.id.ivProfilePic_Item_Teacher_Review_Details)
-        val tvTeacherName : TextView = itemView.findViewById(R.id.tvTeacherName_Item_Teacher_Review_Details)
-        val ivStar1 : ImageView = itemView.findViewById(R.id.ivStar1_Item_Teacher_Review_Details)
-        val ivStar2 : ImageView = itemView.findViewById(R.id.ivStar2_Item_Teacher_Review_Details)
-        val ivStar3 : ImageView = itemView.findViewById(R.id.ivStar3_Item_Teacher_Review_Details)
-        val ivStar4 : ImageView = itemView.findViewById(R.id.ivStar4_Item_Teacher_Review_Details)
-        val ivStar5 : ImageView = itemView.findViewById(R.id.ivStar5_Item_Teacher_Review_Details)
-
-        //TODO :- Implement the Real function Body as the above is just for testing purposes !! :------------------------
+    inner class ViewHolder( val binding : ItemTeacherReviewDetailsRowBinding) : RecyclerView.ViewHolder(binding.root){
+        val stars : List<ImageView> = listOf(
+                    binding.ivStar1ItemTeacherReviewDetails,
+                    binding.ivStar2ItemTeacherReviewDetails,
+                    binding.ivStar3ItemTeacherReviewDetails,
+                    binding.ivStar4ItemTeacherReviewDetails,
+                    binding.ivStar5ItemTeacherReviewDetails
+            )
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_teacher_review_details_row, parent , false)
-        return ViewHolder(view)
+        val binding = ItemTeacherReviewDetailsRowBinding.inflate(LayoutInflater.from(parent.context) , parent , false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //Testing :- The real function is yet to be Implemented
-        holder.tvTeacherName.text = reviewList[position].name
-        holder.ivProfilePic.setImageResource(reviewList[position].prPic)
 
-        //TODO :- Implement the Real Function Body as the above is just for Testing purpose !! :---------------------------
+        holder.binding.tvTeacherNameItemTeacherReviewDetails.text = reviewList[position].faculty.name
+        holder.binding.tvReviewItemTeacherReviewDetails.text = reviewList[position].review
+
+        // point is the Average Point of each review given by student
+        var point = 2.99
+        var count = 0
+        while(point.toInt() >= 0.9){
+            holder.stars[count].setImageResource(R.drawable.full_star_icon)
+            count++
+            point-=1
+        }
+        if(point >= 0.5)
+            holder.stars[count].setImageResource(R.drawable.half_star_icon)
+        // TODO :- Get the avg Rating of each review when we finally get the Api endpoint for that
     }
 
     override fun getItemCount(): Int {
@@ -46,9 +50,7 @@ class TeacherReviewDetailsAdapter : RecyclerView.Adapter<TeacherReviewDetailsAda
     }
 
     // This Function Updates the data of the RecyclerView
-//    fun updateData(newList : List<ReviewData>){
-    //Testing , The real Function prototype is in the above Line
-    fun updateData(newList : List<Tester>){
+    fun updateData(newList : List<IndividualReviewData>){
         reviewList = newList
         notifyDataSetChanged()
     }
