@@ -14,7 +14,6 @@ import com.example.teacherreview.R
 import com.example.teacherreview.databinding.FragmentTeacherListBinding
 import com.example.teacherreview.ui.adapters.RecyclerViewOnItemClick
 import com.example.teacherreview.ui.adapters.TeacherListAdapter
-import com.example.teacherreview.utils.TestRunner.Companion.startTesting
 import com.example.teacherreview.viewmodels.SharedViewModel
 
 /**
@@ -46,22 +45,20 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
         // Setting up the RecyclerView Instances and all the required Instances !!
         setupInstances()
 
-        // Testing :--------------------------------------------------------------------------------------------
-        myAdapter.updateData(startTesting())
-
-
         //Observable if the Teacher List changes or user hits any Sort options
         sharedViewModel.myTeacherList.observe(viewLifecycleOwner){ response ->
             if(response.isSuccessful){
-                d("Teacher Review Fragment" , response.body().toString())
-                //TODO :- Call the Adapter class function (User - Defined) for the updates of the new ReviewList
+                d("Main Activity" , response.body().toString())
+                myAdapter.updateData(response.body()!!.individualFacultyData)
             }
-            else
+            else{
                 Toast.makeText(requireContext() , "Invalid Parameters. Please Try Again !!" , Toast.LENGTH_LONG).show()
+                // TODO :- Make another else block for letting the user know that he don't have net connection
+            }
         }
 
         //Initially Taking the Values once so the Values comes to the RecyclerView
-        sharedViewModel.getTeacherReviewList()
+        sharedViewModel.getTeacherList()
     }
 
     // Function which setup all the required Instances for the Fragment !

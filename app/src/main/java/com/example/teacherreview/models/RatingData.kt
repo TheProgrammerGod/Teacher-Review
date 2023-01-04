@@ -8,7 +8,5 @@ data class RatingData(
     @SerializedName("marking")
     val markingRating : RatingParameterData? ,
     @SerializedName("attendance")
-    val attendanceRating : RatingParameterData? ,
-    @SerializedName("overall")
-    val overallRating : RatingParameterData?
+    val attendanceRating : RatingParameterData?
 )
