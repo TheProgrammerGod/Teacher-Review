@@ -19,6 +19,14 @@ interface RetrofitApi {
         @Header("Authorization") token: String ,
         @Query("faculty") facultyId : String
     ) : retrofit2.Response<ReviewData>
+
+    // This calls the API and fetches the particular Student Review History
+    @GET("reviews?${"$"}populate=faculty&${"$"}populate=subject")
+    suspend fun getStudentReviewHistory(
+        @Header("Authorization") token: String ,
+        @Query("createdBy")studentId : String
+    ) : retrofit2.Response<ReviewData>
+
 }
 
 //TODO :- We need to make the function in such a way that it takes the token of each user by itself and we don't have to do manually

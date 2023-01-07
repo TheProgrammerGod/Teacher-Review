@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -14,7 +15,6 @@ import com.example.teacherreview.databinding.FragmentTeacherReviewDetailsBinding
 import com.example.teacherreview.models.ReviewData
 import com.example.teacherreview.ui.adapters.TeacherReviewDetailsAdapter
 import com.example.teacherreview.viewmodels.SharedViewModel
-import retrofit2.Response
 
 class TeacherReviewDetailsFragment : Fragment() {
 
@@ -45,31 +45,93 @@ class TeacherReviewDetailsFragment : Fragment() {
             navController.navigate(R.id.action_TeacherReviewDetailsFragment_to_giveTeacherReviewFragment)
         }
 
-        sharedViewModel.myDetailedReviewList.observe(viewLifecycleOwner){response ->
+        sharedViewModel.detailedReviewList.observe(viewLifecycleOwner){ response ->
             if(response.isSuccessful){
-                setupFragmentViews(response)
-                myAdapter.updateData(response.body()!!.individualReviewData)
+
+                // Calling Dummy Function to set the Average data for testing purpose
+                val newData = sharedViewModel.setTeacherAverageRatings(response.body()!!)
+
+                // Passing the list to the function to set the UI for the current layer
+                setupFragmentViews(newData)
+                myAdapter.updateData(newData.individualReviewData)
             }
             else{
                 Toast.makeText(requireContext() , "Internet Error !! Check Again" , Toast.LENGTH_SHORT).show()
             }
         }
-
     }
+
+    // Function which setups the required Instances for the Fragment
     private fun setupInstances(){
         myAdapter = TeacherReviewDetailsAdapter()
         binding.recyclerViewTeacherDetails.layoutManager = LinearLayoutManager(requireContext() , LinearLayoutManager.VERTICAL , false)
         binding.recyclerViewTeacherDetails.adapter = myAdapter
     }
 
-    private fun setupFragmentViews(response: Response<ReviewData>){
-        binding.tvTitleProfile.text = response.body()!!.individualReviewData[0].faculty.name
-        binding.tvRatingTeacherReviewDetails.text = response.body()!!.individualReviewData[0].faculty.avgRating.toString()
+    // This function setups the UI for the current Fragment
+    private fun setupFragmentViews(response: ReviewData){
+        binding.tvTitleProfile.text = response.individualReviewData[0].faculty.name
+        binding.tvRatingTeacherReviewDetails.text = response.individualReviewData[0].faculty.avgRating.toString()
 
-        // TODO :- Implement the three different types of Ratings directly from the Teacher Collection database
+
+        // TODO :- This whole section below need to be fixed
+
+        val teachingStars = listOf<ImageView>(
+            binding.ivStar1TeachingTeacherReviewDetails ,
+            binding.ivStar2TeachingTeacherReviewDetails ,
+            binding.ivStar3TeachingTeacherReviewDetails ,
+            binding.ivStar4TeachingTeacherReviewDetails ,
+            binding.ivStar5TeachingTeacherReviewDetails ,
+            )
+        val marksStars = listOf<ImageView>(
+            binding.ivStar1MarksTeacherReviewDetails ,
+            binding.ivStar2MarksTeacherReviewDetails ,
+            binding.ivStar3MarksTeacherReviewDetails ,
+            binding.ivStar4MarksTeacherReviewDetails ,
+            binding.ivStar5MarksTeacherReviewDetails ,
+            )
+        val attendanceStars = listOf<ImageView>(
+            binding.ivStar1AttendanceTeacherReviewDetails,
+            binding.ivStar2AttendanceTeacherReviewDetails,
+            binding.ivStar3AttendanceTeacherReviewDetails,
+            binding.ivStar4AttendanceTeacherReviewDetails,
+            binding.ivStar5AttendanceTeacherReviewDetails,
+        )
+
+        if(response.avgTeachingRating != null){
+            var point = response.avgTeachingRating
+            var count = 0
+            while(point.toInt() >= 0.9){
+                teachingStars[count].setImageResource(R.drawable.full_star_icon)
+                count++
+                point-=1
+            }
+            if(point >= 0.5)
+                teachingStars[count].setImageResource(R.drawable.half_star_icon)
+        }
+        if(response.avgTeachingRating != null){
+            var point = response.avgTeachingRating
+            var count = 0
+            while(point.toInt() >= 0.9){
+                marksStars[count].setImageResource(R.drawable.full_star_icon)
+                count++
+                point-=1
+            }
+            if(point >= 0.5)
+                marksStars[count].setImageResource(R.drawable.half_star_icon)
+        }
+        if(response.avgTeachingRating != null){
+            var point = response.avgTeachingRating
+            var count = 0
+            while(point.toInt() >= 0.9){
+                attendanceStars[count].setImageResource(R.drawable.full_star_icon)
+                count++
+                point-=1
+            }
+            if(point >= 0.5)
+                attendanceStars[count].setImageResource(R.drawable.half_star_icon)
+        }
     }
-
-
 }
 /*TODO :-- The viewModel is not yet Implemented and the recyclerView instance
    assigning needs to be done in a different function also needs to setup the observables*/

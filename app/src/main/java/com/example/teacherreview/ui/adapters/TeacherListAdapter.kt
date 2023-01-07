@@ -11,7 +11,7 @@ import com.example.teacherreview.models.IndividualFacultyData
 
 class TeacherListAdapter(private val myListener : RecyclerViewOnItemClick) : RecyclerView.Adapter<TeacherListAdapter.TeacherListViewHolder>() {
 
-    // This variable is used to store the data instead fof
+    // This variable is used to store the data of Individual Faculty
     private var myTeacherList : List<IndividualFacultyData> = emptyList()
 
     // This class extends the onClickListener class which implements the function for handling click events
@@ -79,3 +79,5 @@ class TeacherListAdapter(private val myListener : RecyclerViewOnItemClick) : Rec
         notifyDataSetChanged()
     }
 }
+
+//TODO :- Make a  List Adapter and add Paging 3 and implement it

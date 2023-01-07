@@ -1,46 +1,59 @@
 package com.example.teacherreview.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teacherreview.R
-import com.example.teacherreview.utils.Tester
+import com.example.teacherreview.databinding.ItemStudentReviewHistoryRowBinding
+import com.example.teacherreview.models.IndividualReviewData
 
 class StudentReviewHistoryAdapter : RecyclerView.Adapter<StudentReviewHistoryAdapter.StudentReviewHistoryViewHolder>() {
 
-    //    private var reviewList : List <ReviewData> = emptyList()
-                        //Testing The real Variable is the Above Line --------------------------------------------
-    private var reviewList : List <Tester> = emptyList()
+    // This variable stores the data of Individual Review data given
+    private var reviewList : List <IndividualReviewData> = emptyList()
 
-    inner class StudentReviewHistoryViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+    inner class StudentReviewHistoryViewHolder(val binding: ItemStudentReviewHistoryRowBinding) : RecyclerView.ViewHolder(binding.root){
 
-        // Testing :- The real function body is yet to be implemented !!-----------------------------------
-        val ivProfilePic : ImageView = itemView.findViewById(R.id.ivProfilePic_Item_Review_History)
-        val tvTeacherName : TextView = itemView.findViewById(R.id.tvTeacherName_Item_Review_History)
-        val ivStar1 : ImageView = itemView.findViewById(R.id.ivStar1_Item_Review_History)
-        val ivStar2 : ImageView = itemView.findViewById(R.id.ivStar2_Item_Review_History)
-        val ivStar3 : ImageView = itemView.findViewById(R.id.ivStar3_Item_Review_History)
-        val ivStar4 : ImageView = itemView.findViewById(R.id.ivStar4_Item_Review_History)
-        val ivStar5 : ImageView = itemView.findViewById(R.id.ivStar5_Item_Review_History)
-
-        //TODO :- Implement the Real function Body as the above is just for testing purposes !! :------------------------
+        // This is an array which contains the five ImageViews which is there in each recyclerView row
+        val stars : List<ImageView> = listOf(
+            binding.ivStar1ItemReviewHistory,
+            binding.ivStar2ItemReviewHistory,
+            binding.ivStar3ItemReviewHistory,
+            binding.ivStar4ItemReviewHistory,
+            binding.ivStar5ItemReviewHistory
+        )
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentReviewHistoryViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_student_review_history_row , parent , false)
-        return StudentReviewHistoryViewHolder(view)
+        val binding = ItemStudentReviewHistoryRowBinding.inflate(LayoutInflater.from(parent.context) , parent , false)
+        return StudentReviewHistoryViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: StudentReviewHistoryViewHolder, position: Int) {
 
-        //Testing :- The real function is yet to be Implemented
-        holder.tvTeacherName.text = reviewList[position].name
-        holder.ivProfilePic.setImageResource(reviewList[position].prPic)
+        // Teacher Name goes Here
+        //TODO :- The Student Name should come here instead of the Teacher Name
+        holder.binding.tvTeacherNameItemReviewHistory.text = reviewList[position].faculty.name
 
-        //TODO :- Implement the Real Function Body as the above is just for Testing purpose !! :--------------------------
+        // The main review of the recyclerView is goes here
+        holder.binding.tvReviewItemReviewHistory.text = reviewList[position].review
+
+
+        // Stars (ImageView) are set accordingly to the overallRating
+        if(reviewList[position].rating.overallRating != null){
+            var overallRating = reviewList[position].rating.overallRating
+            var count = 0
+            while(overallRating?.toInt()!! >= 0.9){
+                holder.stars[count].setImageResource(R.drawable.full_star_icon)
+                count++
+                overallRating-=1
+            }
+            if(overallRating >= 0.5)
+                holder.stars[count].setImageResource(R.drawable.half_star_icon)
+        }
+        /*TODO :- Implement the Rest of the Parameters like Teaching rating, marking rating
+            attendance rating , and their descriptions
+         */
     }
 
     override fun getItemCount(): Int {
@@ -48,10 +61,10 @@ class StudentReviewHistoryAdapter : RecyclerView.Adapter<StudentReviewHistoryAda
     }
 
     // This Function Updates the data of the RecyclerView
-//    fun updateData(newList : List<ReviewData>){
-    //Testing , The real Function prototype is the above Line
-    fun updateData(newList : List<Tester>){
+    fun updateData(newList : List<IndividualReviewData>){
         reviewList = newList
         notifyDataSetChanged()
     }
 }
+
+//TODO :- Make a  List Adapter and add Paging 3 and implement it

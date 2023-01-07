@@ -45,8 +45,11 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
         // Setting up the RecyclerView Instances and all the required Instances !!
         setupInstances()
 
+        //Initially Taking the Values once so the Values comes to the RecyclerView
+        sharedViewModel.getTeacherList()
+
         //Observable if the Teacher List changes or user hits any Sort options
-        sharedViewModel.myTeacherList.observe(viewLifecycleOwner){ response ->
+        sharedViewModel.teacherList.observe(viewLifecycleOwner){ response ->
             if(response.isSuccessful){
                 myAdapter.updateData(response.body()!!.individualFacultyData)
             }
@@ -56,8 +59,6 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
             }
         }
 
-        //Initially Taking the Values once so the Values comes to the RecyclerView
-        sharedViewModel.getTeacherList()
     }
 
     // Function which setup all the required Instances for the Fragment !
@@ -72,20 +73,12 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
     // Function which will be invoked when the RecyclerView Item is Clicked
     override fun onItemClick(facultyId : String) {
 
-
-
-
+        // Calling the Function which changes the data for the observable which is then observed by TeacherReviewDetailsFragment
         sharedViewModel.getDetailedReviews(facultyId)
-
-
-
-
 
         // Changing Fragment to the TeacherReviewDetails Fragment
         val navController = findNavController()
         navController.navigate(R.id.action_teacherListFragment_to_TeacherReviewDetailsFragment)
 
-        // This toast is for testing Purposes :---------------------------------------------------------------------
-        Toast.makeText(requireContext() , facultyId, Toast.LENGTH_SHORT).show()
     }
 }

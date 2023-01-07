@@ -8,11 +8,13 @@ import com.example.teacherreview.R
 import com.example.teacherreview.databinding.ItemTeacherReviewDetailsRowBinding
 import com.example.teacherreview.models.IndividualReviewData
 
-class TeacherReviewDetailsAdapter : RecyclerView.Adapter<TeacherReviewDetailsAdapter.ViewHolder>() {
+class TeacherReviewDetailsAdapter : RecyclerView.Adapter<TeacherReviewDetailsAdapter.TeacherReviewDetailsViewHolder>() {
 
     private var reviewList : List <IndividualReviewData> = emptyList()
 
-    inner class ViewHolder( val binding : ItemTeacherReviewDetailsRowBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class TeacherReviewDetailsViewHolder(val binding : ItemTeacherReviewDetailsRowBinding) : RecyclerView.ViewHolder(binding.root){
+
+        // This is an array which contains the five ImageViews which is there in each recyclerView row
         val stars : List<ImageView> = listOf(
                     binding.ivStar1ItemTeacherReviewDetails,
                     binding.ivStar2ItemTeacherReviewDetails,
@@ -22,27 +24,34 @@ class TeacherReviewDetailsAdapter : RecyclerView.Adapter<TeacherReviewDetailsAda
             )
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeacherReviewDetailsViewHolder {
         val binding = ItemTeacherReviewDetailsRowBinding.inflate(LayoutInflater.from(parent.context) , parent , false)
-        return ViewHolder(binding)
+        return TeacherReviewDetailsViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TeacherReviewDetailsViewHolder, position: Int) {
 
+        // Teacher Name goes here
         holder.binding.tvTeacherNameItemTeacherReviewDetails.text = reviewList[position].faculty.name
+
+        // Teacher Review Goes Here
         holder.binding.tvReviewItemTeacherReviewDetails.text = reviewList[position].review
 
-        // point is the Average Point of each review given by student
-        var point = 2.99
-        var count = 0
-        while(point.toInt() >= 0.9){
-            holder.stars[count].setImageResource(R.drawable.full_star_icon)
-            count++
-            point-=1
+        // Stars (ImageView) are set accordingly to the overallRating
+        if(reviewList[position].rating.overallRating != null){
+            var point = reviewList[position].rating.overallRating
+            var count = 0
+            while(point?.toInt()!! >= 0.9){
+                holder.stars[count].setImageResource(R.drawable.full_star_icon)
+                count++
+                point-=1
+            }
+            if(point >= 0.5)
+                holder.stars[count].setImageResource(R.drawable.half_star_icon)
         }
-        if(point >= 0.5)
-            holder.stars[count].setImageResource(R.drawable.half_star_icon)
-        // TODO :- Get the avg Rating of each review when we finally get the Api endpoint for that
+        /*TODO :- Implement the Rest of the Parameters like Teaching rating, marking rating
+            attendance rating , and their descriptions
+         */
     }
 
     override fun getItemCount(): Int {
@@ -55,3 +64,5 @@ class TeacherReviewDetailsAdapter : RecyclerView.Adapter<TeacherReviewDetailsAda
         notifyDataSetChanged()
     }
 }
+
+//TODO :- Make a  List Adapter and add Paging 3 and implement it
