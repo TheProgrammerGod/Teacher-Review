@@ -32,81 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvTitle_Teacher_List" />
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="22dp"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle_Teacher_List"
-        app:layout_constraintVertical_bias="0.0">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.google.android.material.chip.ChipGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip1_Teacher_List"
-                    style="@style/ChipGrey_14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dms" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip2_Teacher_List"
-                    style="@style/ChipGrey_14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dms" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip3_Teacher_List"
-                    style="@style/ChipGrey_14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dms" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip4_Teacher_List"
-                    style="@style/ChipGrey_14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dms" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip5_Teacher_List"
-                    style="@style/ChipGrey_14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dms" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip6_Teacher_List"
-                    style="@style/ChipGrey_14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dms" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip7_Teacher_List"
-                    style="@style/ChipGrey_14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dms" />
-            </com.google.android.material.chip.ChipGroup>
-        </LinearLayout>
-    </HorizontalScrollView>
-
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
@@ -118,7 +43,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle_Teacher_List"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView

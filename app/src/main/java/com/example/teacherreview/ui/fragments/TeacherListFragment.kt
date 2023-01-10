@@ -1,7 +1,6 @@
 package com.example.teacherreview.ui.fragments
 
 import android.os.Bundle
-import android.util.Log.d
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,14 +15,9 @@ import com.example.teacherreview.ui.adapters.RecyclerViewOnItemClick
 import com.example.teacherreview.ui.adapters.TeacherListAdapter
 import com.example.teacherreview.viewmodels.SharedViewModel
 
-/**
- * Implementing the RecyclerViewOnItemClick interface here so that we can implement all the code
- * in our fragment Class since its related to calling different Fragment and related to UI stuffs
- * which are handled at out Fragment rather than Adapter class
-  */
-
 class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
 
+    // Variable made to update the ,
     private lateinit var binding :FragmentTeacherListBinding
     // Creating the SharedViewModel Instance
     private val sharedViewModel : SharedViewModel by activityViewModels()
@@ -45,11 +39,13 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
         // Setting up the RecyclerView Instances and all the required Instances !!
         setupInstances()
 
+        //Initially Taking the Values once so the Values comes to the RecyclerView
+        sharedViewModel.getTeacherList()
+
         //Observable if the Teacher List changes or user hits any Sort options
-        sharedViewModel.myTeacherList.observe(viewLifecycleOwner){ response ->
+        sharedViewModel.teacherList.observe(viewLifecycleOwner){ response ->
             if(response.isSuccessful){
-                d("Main Activity" , response.body().toString())
-                myAdapter.updateData(response.body()!!.individualFacultyData)
+                myAdapter.submitList(response.body()!!.individualFacultyData)
             }
             else{
                 Toast.makeText(requireContext() , "Invalid Parameters. Please Try Again !!" , Toast.LENGTH_LONG).show()
@@ -57,8 +53,6 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
             }
         }
 
-        //Initially Taking the Values once so the Values comes to the RecyclerView
-        sharedViewModel.getTeacherList()
     }
 
     // Function which setup all the required Instances for the Fragment !
@@ -71,13 +65,14 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
     }
 
     // Function which will be invoked when the RecyclerView Item is Clicked
-    override fun onItemClick(position: Int) {
+    override fun onItemClick(facultyId : String) {
+
+        // Calling the Function which changes the data for the observable which is then observed by TeacherReviewDetailsFragment
+        sharedViewModel.getDetailedReviews(facultyId)
 
         // Changing Fragment to the TeacherReviewDetails Fragment
         val navController = findNavController()
         navController.navigate(R.id.action_teacherListFragment_to_TeacherReviewDetailsFragment)
 
-        // This toast is for testing Purposes :---------------------------------------------------------------------
-        Toast.makeText(requireContext() , "Teacher Name : $position" , Toast.LENGTH_SHORT).show()
     }
 }

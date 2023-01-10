@@ -3,6 +3,7 @@ package com.example.teacherreview.models
 import com.google.gson.annotations.SerializedName
 
 data class RatingData(
+    var overallRating : Double?,
     @SerializedName("teaching")
     val teachingRating : RatingParameterData? ,
     @SerializedName("marking")

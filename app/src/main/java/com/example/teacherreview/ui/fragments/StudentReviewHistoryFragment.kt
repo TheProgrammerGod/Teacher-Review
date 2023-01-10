@@ -10,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teacherreview.databinding.FragmentStudentReviewHistoryBinding
 import com.example.teacherreview.ui.adapters.StudentReviewHistoryAdapter
-import com.example.teacherreview.utils.TestRunner.Companion.startTesting
 import com.example.teacherreview.viewmodels.SharedViewModel
 
 class StudentReviewHistoryFragment : Fragment() {
@@ -36,21 +35,20 @@ class StudentReviewHistoryFragment : Fragment() {
         // Setting up the RecyclerView Instances and all the required Instances !!
         setupInstance()
 
-        // Testing :--------------------------------------------------------------------------------------------
-        myAdapter.updateData(startTesting())
-
+        // TODO :- Dummy Id Binding is done here
+        sharedViewModel.getStudentReviewList("63b1f2e644b81bcd4940d18d")
 
         //Observable to observe for changes in the ReviewList
-        sharedViewModel.myTeacherList.observe(viewLifecycleOwner){ response ->
+        sharedViewModel.studentReviewHistoryList.observe(viewLifecycleOwner){ response ->
             if(response.isSuccessful){
-                // TODO :- Call the Recycler View and update the list
+
+                // Calling a function which calculates the average and sets it (Dummy Setup)
+                val newData = sharedViewModel.setTeacherAverageRatings(response.body()!!)
+                myAdapter.submitList(newData.individualReviewData)
             }
             else
                 Toast.makeText(requireContext() , "No Data!! Try again Later" , Toast.LENGTH_LONG).show()
         }
-
-        //Initially Taking the Values to update the RecyclerView
-        sharedViewModel.getStudentReviewList(1223123) // TODO :- Student Roll in the parameter
     }
 
     // Function which setup all the required Instances for the Fragment !

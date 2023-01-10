@@ -5,5 +5,5 @@ package com.example.teacherreview.ui.adapters
  * will execute if an item of RecyclerView is clicked
   */
 interface RecyclerViewOnItemClick {
-    fun onItemClick(position : Int)
+    fun onItemClick(facultyId : String)
 }

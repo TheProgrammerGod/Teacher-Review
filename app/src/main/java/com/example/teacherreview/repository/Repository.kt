@@ -1,13 +1,25 @@
 package com.example.teacherreview.repository
 
-import com.example.teacherreview.api.RetrofitInstance
+import com.example.teacherreview.api.RetrofitInstance.apiInstance
 import com.example.teacherreview.models.FacultiesData
+import com.example.teacherreview.models.ReviewData
 import com.example.teacherreview.utils.Constants
 
+// This class basically is responsible for calling whether we want th code
 class Repository {
 
     // This calls the API and fetches all the Teachers there in the Database
     suspend fun getTeacherList(token : String = Constants.TOKEN) :retrofit2.Response<FacultiesData>{
-        return RetrofitInstance.apiInstance.getTeacherList(token)
+        return apiInstance.getTeacherList(token)
+    }
+
+    // This calls the API and fetches detailed Reviews of a particular Teachers
+    suspend fun getDetailedReviews(token : String = Constants.TOKEN , facultyId : String) : retrofit2.Response<ReviewData>{
+        return apiInstance.getDetailedReviews(token , facultyId)
+    }
+
+    // This calls the API and fetches particular Student Review History Data
+    suspend fun getStudentReviewHistory(token: String = Constants.TOKEN , studentId: String) : retrofit2.Response<ReviewData>{
+        return apiInstance.getStudentReviewHistory(token , studentId)
     }
 }

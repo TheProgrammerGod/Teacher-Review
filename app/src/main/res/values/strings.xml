@@ -22,4 +22,5 @@
     <string name="marks_rating">Marks Rating</string>
     <string name="attendance_rating">Attendance Rating</string>
     <string name="profile_pic_of_user">Profile Pic of User</string>
+    <string name="s_rating">%s Rating</string>
 </resources>

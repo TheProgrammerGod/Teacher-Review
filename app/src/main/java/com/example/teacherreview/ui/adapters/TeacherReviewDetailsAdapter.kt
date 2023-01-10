@@ -1,55 +1,160 @@
 package com.example.teacherreview.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teacherreview.R
-import com.example.teacherreview.utils.Tester
+import com.example.teacherreview.databinding.ItemTeacherReviewDetailsRowBinding
+import com.example.teacherreview.models.IndividualReviewData
+import com.example.teacherreview.models.RatingParameterData
 
-class TeacherReviewDetailsAdapter : RecyclerView.Adapter<TeacherReviewDetailsAdapter.ViewHolder>() {
+class TeacherReviewDetailsAdapter : ListAdapter<IndividualReviewData , TeacherReviewDetailsAdapter.TeacherReviewDetailsViewHolder>
+    (TeacherReviewDetailsComparator()) {
 
-    //    private var reviewList : List <ReviewData> = emptyList()
-    //Testing The real Variable is in the Above Line --------------------------------------------
-    private var reviewList : List <Tester> = emptyList()
+    inner class TeacherReviewDetailsViewHolder(val binding : ItemTeacherReviewDetailsRowBinding) : RecyclerView.ViewHolder(binding.root){
 
-    inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        // Testing :- The real function body is yet to be implemented !!-----------------------------------
-        val ivProfilePic : ImageView = itemView.findViewById(R.id.ivProfilePic_Item_Teacher_Review_Details)
-        val tvTeacherName : TextView = itemView.findViewById(R.id.tvTeacherName_Item_Teacher_Review_Details)
-        val ivStar1 : ImageView = itemView.findViewById(R.id.ivStar1_Item_Teacher_Review_Details)
-        val ivStar2 : ImageView = itemView.findViewById(R.id.ivStar2_Item_Teacher_Review_Details)
-        val ivStar3 : ImageView = itemView.findViewById(R.id.ivStar3_Item_Teacher_Review_Details)
-        val ivStar4 : ImageView = itemView.findViewById(R.id.ivStar4_Item_Teacher_Review_Details)
-        val ivStar5 : ImageView = itemView.findViewById(R.id.ivStar5_Item_Teacher_Review_Details)
+        // This is an array which contains the five ImageViews which is there in each recyclerView row
+        val starsOverallRating : List<ImageView> = listOf(
+            binding.ivStar1ItemTeacherReviewDetails,
+            binding.ivStar2ItemTeacherReviewDetails,
+            binding.ivStar3ItemTeacherReviewDetails,
+            binding.ivStar4ItemTeacherReviewDetails,
+            binding.ivStar5ItemTeacherReviewDetails
+        )
 
-        //TODO :- Implement the Real function Body as the above is just for testing purposes !! :------------------------
+        // This is an array which contains the five ImageViews of Teaching stars
+        val starsTeachingRating : List <ImageView> = listOf(
+            binding.ivStar1ItemReviewDetailsTeachingRating ,
+            binding.ivStar2ItemReviewDetailsTeachingRating ,
+            binding.ivStar3ItemReviewDetailsTeachingRating ,
+            binding.ivStar4ItemReviewDetailsTeachingRating ,
+            binding.ivStar5ItemReviewDetailsTeachingRating ,
+        )
+
+        // This is an array which contains the five ImageViews of Marks stars
+        val starsMarksRating : List<ImageView> = listOf(
+            binding.ivStar1ItemReviewDetailsMarkingRating ,
+            binding.ivStar2ItemReviewDetailsMarkingRating ,
+            binding.ivStar3ItemReviewDetailsMarkingRating ,
+            binding.ivStar4ItemReviewDetailsMarkingRating ,
+            binding.ivStar5ItemReviewDetailsMarkingRating ,
+        )
+
+        // This is an array which contains the five ImageViews of Attendance stars
+        val starsAttendanceRating : List<ImageView> = listOf(
+            binding.ivStar1ItemReviewDetailsAttendanceRating ,
+            binding.ivStar2ItemReviewDetailsAttendanceRating ,
+            binding.ivStar3ItemReviewDetailsAttendanceRating ,
+            binding.ivStar4ItemReviewDetailsAttendanceRating ,
+            binding.ivStar5ItemReviewDetailsAttendanceRating ,
+        )
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_teacher_review_details_row, parent , false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeacherReviewDetailsViewHolder {
+        val binding = ItemTeacherReviewDetailsRowBinding.inflate(LayoutInflater.from(parent.context) , parent , false)
+        return TeacherReviewDetailsViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //Testing :- The real function is yet to be Implemented
-        holder.tvTeacherName.text = reviewList[position].name
-        holder.ivProfilePic.setImageResource(reviewList[position].prPic)
+    override fun onBindViewHolder(holder: TeacherReviewDetailsViewHolder, position: Int) {
 
-        //TODO :- Implement the Real Function Body as the above is just for Testing purpose !! :---------------------------
+        val review = getItem(position)
+
+        //TODO :-  Review Giver Name goes here (Need to correct it)
+        holder.binding.tvTeacherNameItemTeacherReviewDetails.text = review.faculty.name
+
+        // Review of the Student Goes Here
+        holder.binding.tvReviewItemTeacherReviewDetails.text = review.review
+
+        // Stars (ImageView) are set accordingly to the overallRating
+        if(review.rating.overallRating != null)
+            calculateStars(review.rating.overallRating!! , holder.starsOverallRating)
+
+        // Calling the setUI function to set the UI of the teaching rating
+        if(review.rating.teachingRating != null)
+            setUI(
+                review.rating.teachingRating ,
+                holder.starsTeachingRating ,
+                holder.binding.tvReviewItemReviewDetailsTeachingReview ,
+                holder.binding.layoutItemTeacherReviewDetails ,
+                holder.binding.teachingRatingLayout
+            )
+
+        // Calling the setUI function to set the UI of the marking rating
+        if(review.rating.markingRating != null)
+            setUI(
+                review.rating.markingRating ,
+                holder.starsMarksRating ,
+                holder.binding.tvReviewItemReviewDetailsMarkingReview ,
+                holder.binding.layoutItemTeacherReviewDetails ,
+                holder.binding.marksRatingLayout
+            )
+
+        // Calling the setUI function to set the UI of the attendance rating
+        if(review.rating.attendanceRating != null)
+            setUI(
+                review.rating.attendanceRating ,
+                holder.starsAttendanceRating ,
+                holder.binding.tvReviewItemReviewDetailsAttendanceRating ,
+                holder.binding.layoutItemTeacherReviewDetails ,
+                holder.binding.attendanceRatingLayout
+            )
     }
 
-    override fun getItemCount(): Int {
-        return reviewList.size
+    // Function which sets the UI of the Stars (ImageViews) and the description if any
+    private fun setUI(rating : RatingParameterData, stars : List<ImageView>, tvReview : TextView, parentLayout: LinearLayoutCompat, individualRatingLayout : ConstraintLayout){
+
+        // If both description and rating is Nonnull
+        if(rating.description != null && rating.ratedPoints != null){
+            tvReview.text = rating.description
+            calculateStars(rating.ratedPoints , stars)
+        }
+        // If description is Null and rating is Nonnull
+        else if(rating.description == null && rating.ratedPoints != null){
+            individualRatingLayout.removeView(tvReview)
+            calculateStars(rating.ratedPoints , stars)
+        }
+        // If description is Nonnull and rating is Null
+        else if(rating.description != null)
+            tvReview.text = rating.description
+        // If both are Null
+        else
+            parentLayout.removeView(individualRatingLayout)
     }
 
-    // This Function Updates the data of the RecyclerView
-//    fun updateData(newList : List<ReviewData>){
-    //Testing , The real Function prototype is in the above Line
-    fun updateData(newList : List<Tester>){
-        reviewList = newList
-        notifyDataSetChanged()
+    // Calculating the Stars that needs to be Visible and then setting the resources of the stars accordingly
+    private fun calculateStars(pointsParam : Double , stars : List <ImageView>){
+        var points = pointsParam
+        var count = 0
+        while(points.toInt() >= 0.9){
+            stars[count].setImageResource(R.drawable.full_star_icon)
+            count++
+            points-=1
+        }
+        if(points >= 0.5)
+            stars[count].setImageResource(R.drawable.half_star_icon)
     }
+
+    // DiffUtil class which compares the newList to the oldList
+    class TeacherReviewDetailsComparator : DiffUtil.ItemCallback<IndividualReviewData> (){
+        override fun areItemsTheSame(
+            oldItem: IndividualReviewData,
+            newItem: IndividualReviewData
+        ): Boolean {
+            return (oldItem._id == newItem._id)
+        }
+
+        override fun areContentsTheSame(
+            oldItem: IndividualReviewData,
+            newItem: IndividualReviewData
+        ): Boolean {
+            return (oldItem == newItem)
+        }
+    }
+    //TODO :- Add Paging 3 and implement it
 }
