@@ -5,5 +5,7 @@ data class IndividualReviewData (
     val review : String ,
     val rating : RatingData ,
     val faculty : IndividualFacultyData ,
-    val subject : SubjectsData
-    ) // Everything is Serialized according to the JSON response file
+    val subject : SubjectsData ,
+//    val createdBy : UserData
+    )
+// Everything is Serialized according to the JSON response file

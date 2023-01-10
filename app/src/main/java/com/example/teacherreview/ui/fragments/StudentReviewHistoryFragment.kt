@@ -44,7 +44,7 @@ class StudentReviewHistoryFragment : Fragment() {
 
                 // Calling a function which calculates the average and sets it (Dummy Setup)
                 val newData = sharedViewModel.setTeacherAverageRatings(response.body()!!)
-                myAdapter.updateData(newData.individualReviewData)
+                myAdapter.submitList(newData.individualReviewData)
             }
             else
                 Toast.makeText(requireContext() , "No Data!! Try again Later" , Toast.LENGTH_LONG).show()

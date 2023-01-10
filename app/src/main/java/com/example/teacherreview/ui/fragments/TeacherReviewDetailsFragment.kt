@@ -53,7 +53,7 @@ class TeacherReviewDetailsFragment : Fragment() {
 
                 // Passing the list to the function to set the UI for the current layer
                 setupFragmentViews(newData)
-                myAdapter.updateData(newData.individualReviewData)
+                myAdapter.submitList(newData.individualReviewData)
             }
             else{
                 Toast.makeText(requireContext() , "Internet Error !! Check Again" , Toast.LENGTH_SHORT).show()
@@ -70,12 +70,14 @@ class TeacherReviewDetailsFragment : Fragment() {
 
     // This function setups the UI for the current Fragment
     private fun setupFragmentViews(response: ReviewData){
+
+        // Faculty Name Goes here
         binding.tvTitleProfile.text = response.individualReviewData[0].faculty.name
+
+        // Average Rating Goes here
         binding.tvRatingTeacherReviewDetails.text = response.individualReviewData[0].faculty.avgRating.toString()
 
-
-        // TODO :- This whole section below need to be fixed
-
+        // This is an array which contains the five ImageViews of teaching stars
         val teachingStars = listOf<ImageView>(
             binding.ivStar1TeachingTeacherReviewDetails ,
             binding.ivStar2TeachingTeacherReviewDetails ,
@@ -83,13 +85,17 @@ class TeacherReviewDetailsFragment : Fragment() {
             binding.ivStar4TeachingTeacherReviewDetails ,
             binding.ivStar5TeachingTeacherReviewDetails ,
             )
-        val marksStars = listOf<ImageView>(
+
+        // This is an array which contains the five ImageViews of marking stars
+        val markingStars = listOf<ImageView>(
             binding.ivStar1MarksTeacherReviewDetails ,
             binding.ivStar2MarksTeacherReviewDetails ,
             binding.ivStar3MarksTeacherReviewDetails ,
             binding.ivStar4MarksTeacherReviewDetails ,
             binding.ivStar5MarksTeacherReviewDetails ,
             )
+
+        // This is an array which contains the five ImageViews of attendance stars
         val attendanceStars = listOf<ImageView>(
             binding.ivStar1AttendanceTeacherReviewDetails,
             binding.ivStar2AttendanceTeacherReviewDetails,
@@ -98,40 +104,30 @@ class TeacherReviewDetailsFragment : Fragment() {
             binding.ivStar5AttendanceTeacherReviewDetails,
         )
 
-        if(response.avgTeachingRating != null){
-            var point = response.avgTeachingRating
-            var count = 0
-            while(point.toInt() >= 0.9){
-                teachingStars[count].setImageResource(R.drawable.full_star_icon)
-                count++
-                point-=1
-            }
-            if(point >= 0.5)
-                teachingStars[count].setImageResource(R.drawable.half_star_icon)
+        // Checking if there exists an avg teaching rating and calling function to set the UI
+        if(response.avgTeachingRating != null) {
+            calculateStars(response.avgTeachingRating , teachingStars)
         }
-        if(response.avgTeachingRating != null){
-            var point = response.avgTeachingRating
-            var count = 0
-            while(point.toInt() >= 0.9){
-                marksStars[count].setImageResource(R.drawable.full_star_icon)
-                count++
-                point-=1
-            }
-            if(point >= 0.5)
-                marksStars[count].setImageResource(R.drawable.half_star_icon)
+
+        // Checking if there exists an avg marking rating and calling function to set the UI
+        if(response.avgMarkingRating != null)
+            calculateStars(response.avgMarkingRating , markingStars)
+
+        // Checking if there exists an avg attendance rating and calling function to set the UI
+        if(response.avgAttendanceRating != null)
+            calculateStars(response.avgAttendanceRating , attendanceStars)
+    }
+
+    // Calculating the Stars that needs to be Visible and then setting the resources of the stars accordingly
+    private fun calculateStars(pointsParam : Double , stars : List <ImageView>){
+        var points = pointsParam
+        var count = 0
+        while(points.toInt() >= 0.9){
+            stars[count].setImageResource(R.drawable.full_star_icon)
+            count++
+            points-=1
         }
-        if(response.avgTeachingRating != null){
-            var point = response.avgTeachingRating
-            var count = 0
-            while(point.toInt() >= 0.9){
-                attendanceStars[count].setImageResource(R.drawable.full_star_icon)
-                count++
-                point-=1
-            }
-            if(point >= 0.5)
-                attendanceStars[count].setImageResource(R.drawable.half_star_icon)
-        }
+        if(points >= 0.5)
+            stars[count].setImageResource(R.drawable.half_star_icon)
     }
 }
-/*TODO :-- The viewModel is not yet Implemented and the recyclerView instance
-   assigning needs to be done in a different function also needs to setup the observables*/

@@ -15,12 +15,6 @@ import com.example.teacherreview.ui.adapters.RecyclerViewOnItemClick
 import com.example.teacherreview.ui.adapters.TeacherListAdapter
 import com.example.teacherreview.viewmodels.SharedViewModel
 
-/**
- * Implementing the RecyclerViewOnItemClick interface here so that we can implement all the code
- * in our fragment Class since its related to calling different Fragment and related to UI stuffs
- * which are handled at out Fragment rather than Adapter class
-  */
-
 class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
 
     // Variable made to update the ,
@@ -51,7 +45,7 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
         //Observable if the Teacher List changes or user hits any Sort options
         sharedViewModel.teacherList.observe(viewLifecycleOwner){ response ->
             if(response.isSuccessful){
-                myAdapter.updateData(response.body()!!.individualFacultyData)
+                myAdapter.submitList(response.body()!!.individualFacultyData)
             }
             else{
                 Toast.makeText(requireContext() , "Invalid Parameters. Please Try Again !!" , Toast.LENGTH_LONG).show()

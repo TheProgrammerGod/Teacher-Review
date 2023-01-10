@@ -4,15 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teacherreview.R
 import com.example.teacherreview.databinding.ItemTeacherListRowBinding
 import com.example.teacherreview.models.IndividualFacultyData
 
-class TeacherListAdapter(private val myListener : RecyclerViewOnItemClick) : RecyclerView.Adapter<TeacherListAdapter.TeacherListViewHolder>() {
-
-    // This variable is used to store the data of Individual Faculty
-    private var myTeacherList : List<IndividualFacultyData> = emptyList()
+class TeacherListAdapter(private val myListener : RecyclerViewOnItemClick) : ListAdapter<IndividualFacultyData , TeacherListAdapter.TeacherListViewHolder>(Comparator()) {
 
     // This class extends the onClickListener class which implements the function for handling click events
     inner class TeacherListViewHolder(val binding: ItemTeacherListRowBinding) : RecyclerView.ViewHolder(binding.root) , View.OnClickListener{
@@ -22,8 +21,7 @@ class TeacherListAdapter(private val myListener : RecyclerViewOnItemClick) : Rec
             itemView.setOnClickListener(this)
         }
 
-
-        // stars variable which contains all the star images in an array so we can use a loop to make our code smaller
+        // stars variable which contains all the overall rating star (ImageView)
         val stars : List<ImageView> = listOf(
             binding.ivStar1ItemTeacherList,
             binding.ivStar2ItemTeacherList,
@@ -35,14 +33,8 @@ class TeacherListAdapter(private val myListener : RecyclerViewOnItemClick) : Rec
         // This function is called when a certain item of a recyclerView is CLicked
         override fun onClick(v: View?) {
             val position = adapterPosition
-            if(position != RecyclerView.NO_POSITION) {
-                /**
-                 * We are calling our custom made RecyclerViewOnItemClick class which have this function
-                 * implemented on the fragment and the rest code is handled there rather than in the
-                 * adapter class since this part is related to UI and switching Fragment
-                 */
-                myListener.onItemClick(myTeacherList[position]._id)
-            }
+            if(position != RecyclerView.NO_POSITION)
+                myListener.onItemClick(getItem(position)._id)
         }
     }
 
@@ -54,10 +46,12 @@ class TeacherListAdapter(private val myListener : RecyclerViewOnItemClick) : Rec
 
     override fun onBindViewHolder(holder: TeacherListViewHolder, position: Int) {
 
+        val faculty = getItem(position)
+
         // TODO :- Profile Pic
-        holder.binding.tvTeacherNameItemTeacherList.text = myTeacherList[position].name
+        holder.binding.tvTeacherNameItemTeacherList.text = faculty.name
         // TODO :- Subject Name
-        var point = myTeacherList[position].avgRating
+        var point =faculty.avgRating
         var count = 0
         while (point.toInt() >= 0.9){
             holder.stars[count].setImageResource(R.drawable.full_star_icon)
@@ -69,15 +63,22 @@ class TeacherListAdapter(private val myListener : RecyclerViewOnItemClick) : Rec
         }
     }
 
-    override fun getItemCount(): Int {
-         return myTeacherList.size
+    // DiffUtil class which compares the newList to the oldList
+    class Comparator : DiffUtil.ItemCallback<IndividualFacultyData>(){
+        override fun areItemsTheSame(
+            oldItem: IndividualFacultyData,
+            newItem: IndividualFacultyData
+        ): Boolean {
+            return (oldItem._id == newItem._id)
+        }
+
+        override fun areContentsTheSame(
+            oldItem: IndividualFacultyData,
+            newItem: IndividualFacultyData
+        ): Boolean {
+            return (newItem == oldItem)
+        }
     }
 
-    // This Function Updates the data of the RecyclerView
-    fun updateData(newList : List<IndividualFacultyData>){
-        myTeacherList = newList
-        notifyDataSetChanged()
-    }
+    //TODO :- Add Paging 3 and implement it
 }
-
-//TODO :- Make a  List Adapter and add Paging 3 and implement it
