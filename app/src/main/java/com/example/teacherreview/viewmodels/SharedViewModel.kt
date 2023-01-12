@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.teacherreview.models.FacultiesData
-import com.example.teacherreview.models.RatingData
 import com.example.teacherreview.models.ReviewData
+import com.example.teacherreview.models.ReviewPostData
 import com.example.teacherreview.repository.Repository
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -31,6 +31,14 @@ class SharedViewModel : ViewModel() {
     val studentReviewHistoryList : LiveData<Response<ReviewData>>
         get() = _studentReviewHistoryList
 
+    // Give Teacher Review Observable Variables
+    private val _postReview : MutableLiveData<Response<ReviewPostData>> = MutableLiveData()
+    val postReview : LiveData<Response<ReviewPostData>>
+        get() = _postReview
+
+    // Faculty Id is stored here
+    var facultyId : String? = null
+
     // Function calls repository and fetches data from API
     fun getTeacherList(){
         viewModelScope.launch {
@@ -41,16 +49,10 @@ class SharedViewModel : ViewModel() {
 
     // This calls the API and fetches detailed Reviews of a Teachers
     fun getDetailedReviews(facultyId : String){
+        this.facultyId = facultyId
         viewModelScope.launch {
             val response = myRepository.getDetailedReviews(facultyId = facultyId)
             _detailedReviewList.value = response
-        }
-    }
-
-    // Function calls repository and fetches data from API according to the subjects
-    fun getTeacherReviewListBySubject(subject : String){
-        viewModelScope.launch {
-            // TODO :- Ask the Repository to fetch the data by the @QUERY of (subject)
         }
     }
 
@@ -69,7 +71,15 @@ class SharedViewModel : ViewModel() {
         }
     }
 
+    // Function which calls the Repository and posts the Review
+    fun postTeacherReview(individualReviewDataPost: ReviewPostData){
+        viewModelScope.launch {
+            val response = myRepository.postTeacherReview(individualReviewDataPost = individualReviewDataPost)
+            _postReview.value = response
+        }
+    }
 
+    // Function which sets the Average Ratings for showing those in the RecyclerView and for Testing Purposes----------------------
     fun setTeacherAverageRatings(response : ReviewData) : ReviewData{
         val individualReviewData = response.individualReviewData
         var teachingPoint = 0.0
@@ -106,7 +116,4 @@ class SharedViewModel : ViewModel() {
         response.avgTeachingRating = teachingPoint/teachingTotal
         return response
     }
-
-
-
 }

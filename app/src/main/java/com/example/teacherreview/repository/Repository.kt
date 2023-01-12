@@ -1,8 +1,7 @@
 package com.example.teacherreview.repository
 
 import com.example.teacherreview.api.RetrofitInstance.apiInstance
-import com.example.teacherreview.models.FacultiesData
-import com.example.teacherreview.models.ReviewData
+import com.example.teacherreview.models.*
 import com.example.teacherreview.utils.Constants
 
 // This class basically is responsible for calling whether we want th code
@@ -21,5 +20,10 @@ class Repository {
     // This calls the API and fetches particular Student Review History Data
     suspend fun getStudentReviewHistory(token: String = Constants.TOKEN , studentId: String) : retrofit2.Response<ReviewData>{
         return apiInstance.getStudentReviewHistory(token , studentId)
+    }
+
+    // This calls the API and posts a Teacher Review to the Database
+    suspend fun postTeacherReview(token : String = Constants.TOKEN , individualReviewDataPost: ReviewPostData) : retrofit2.Response<ReviewPostData>{
+        return apiInstance.postTeacherReviews(token , individualReviewDataPost)
     }
 }
