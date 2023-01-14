@@ -34,17 +34,18 @@ class TeacherReviewDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupInstances()
 
-        // Setting clickListener on the Floating Action Button which navigates to the giveTeacherReviewFragment
+        // Doing the Fetch Data call to the Server to fetch the data and populate the UI
+        sharedViewModel.getDetailedReviews()
 
-        // Sharing Amount of the Bank is necessary
+        // Setting clickListener on the Floating Action Button which navigates to the giveTeacherReviewFragment
         binding.btnAddReview.setOnClickListener{
             val navController = findNavController()
             navController.navigate(R.id.action_TeacherReviewDetailsFragment_to_giveTeacherReviewFragment)
         }
 
+        // This observes the detailedReviewList
         sharedViewModel.detailedReviewList.observe(viewLifecycleOwner){ response ->
             if(response.isSuccessful){
 
@@ -55,9 +56,8 @@ class TeacherReviewDetailsFragment : Fragment() {
                 setupFragmentViews(newData)
                 myAdapter.submitList(newData.individualReviewData)
             }
-            else{
+            else
                 Toast.makeText(requireContext() , "Internet Error !! Check Again" , Toast.LENGTH_SHORT).show()
-            }
         }
     }
 
@@ -72,10 +72,10 @@ class TeacherReviewDetailsFragment : Fragment() {
     private fun setupFragmentViews(response: ReviewData){
 
         // Faculty Name Goes here
-        binding.tvTitleProfile.text = response.individualReviewData[0].faculty.name
+        binding.tvTitleProfile.text = response.individualReviewData?.get(0)?.faculty?.name
 
         // Average Rating Goes here
-        binding.tvRatingTeacherReviewDetails.text = response.individualReviewData[0].faculty.avgRating.toString()
+        binding.tvRatingTeacherReviewDetails.text = response.individualReviewData?.get(0)?.faculty?.avgRating.toString()
 
         // This is an array which contains the five ImageViews of teaching stars
         val teachingStars = listOf<ImageView>(

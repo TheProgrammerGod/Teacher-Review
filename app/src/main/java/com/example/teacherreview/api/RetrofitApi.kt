@@ -1,9 +1,10 @@
 package com.example.teacherreview.api
 
-import com.example.teacherreview.models.FacultiesData
-import com.example.teacherreview.models.ReviewData
+import com.example.teacherreview.models.*
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 // This is the Interface which gives all the functions which ar later implemented by the Retrofit Library itself
@@ -27,6 +28,12 @@ interface RetrofitApi {
         @Query("createdBy")studentId : String
     ) : retrofit2.Response<ReviewData>
 
+    // This calls the API and posts the Review Data to the Database
+    @POST("reviews")
+    suspend fun postTeacherReviews(
+        @Header("Authorization") token: String ,
+        @Body post : ReviewPostData
+    ) : retrofit2.Response<ReviewPostData>
 }
 
 //TODO :- We need to make the function in such a way that it takes the token of each user by itself and we don't have to do manually
