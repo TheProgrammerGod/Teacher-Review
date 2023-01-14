@@ -3,11 +3,11 @@ package com.example.teacherreview.models
 import com.google.gson.annotations.SerializedName
 
 data class RatingData(
-    var overallRating : Double?,
+    var overallRating : Double = 0.0,
     @SerializedName("teaching")
-    val teachingRating : RatingParameterData? ,
+    val teachingRating : RatingParameterData? = null,
     @SerializedName("marking")
-    val markingRating : RatingParameterData? ,
+    val markingRating : RatingParameterData? = null ,
     @SerializedName("attendance")
-    val attendanceRating : RatingParameterData?
+    val attendanceRating : RatingParameterData? = null
 )

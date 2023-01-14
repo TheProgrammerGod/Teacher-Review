@@ -20,18 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/ivBackButton_Teacher_List"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
-        android:src="@drawable/right_arrow_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/tvTitle_Teacher_List"
-        app:layout_constraintEnd_toStartOf="@+id/tvTitle_Teacher_List"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvTitle_Teacher_List" />
-
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"

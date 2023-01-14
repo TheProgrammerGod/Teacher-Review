@@ -72,11 +72,11 @@ class TeacherReviewDetailsAdapter : ListAdapter<IndividualReviewData , TeacherRe
         holder.binding.tvReviewItemTeacherReviewDetails.text = review.review
 
         // Stars (ImageView) are set accordingly to the overallRating
-        if(review.rating.overallRating != null)
-            calculateStars(review.rating.overallRating!! , holder.starsOverallRating)
+        if(review.rating?.overallRating != null)
+            calculateStars(review.rating.overallRating , holder.starsOverallRating)
 
         // Calling the setUI function to set the UI of the teaching rating
-        if(review.rating.teachingRating != null)
+        if(review.rating?.teachingRating != null)
             setUI(
                 review.rating.teachingRating ,
                 holder.starsTeachingRating ,
@@ -86,7 +86,7 @@ class TeacherReviewDetailsAdapter : ListAdapter<IndividualReviewData , TeacherRe
             )
 
         // Calling the setUI function to set the UI of the marking rating
-        if(review.rating.markingRating != null)
+        if(review.rating?.markingRating != null)
             setUI(
                 review.rating.markingRating ,
                 holder.starsMarksRating ,
@@ -96,7 +96,7 @@ class TeacherReviewDetailsAdapter : ListAdapter<IndividualReviewData , TeacherRe
             )
 
         // Calling the setUI function to set the UI of the attendance rating
-        if(review.rating.attendanceRating != null)
+        if(review.rating?.attendanceRating != null)
             setUI(
                 review.rating.attendanceRating ,
                 holder.starsAttendanceRating ,
