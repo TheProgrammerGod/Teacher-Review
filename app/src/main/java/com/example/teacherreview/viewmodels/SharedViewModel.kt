@@ -31,10 +31,10 @@ class SharedViewModel : ViewModel() {
     val studentReviewHistoryList : LiveData<Response<ReviewData>>
         get() = _studentReviewHistoryList
 
-    // Give Teacher Review Observable Variables
-    private val _postReview : MutableLiveData<Response<ReviewPostData>> = MutableLiveData()
-    val postReview : LiveData<Response<ReviewPostData>>
-        get() = _postReview
+    // Student Review Post Request
+    private var _reviewPostSuccess : MutableLiveData<Boolean> = MutableLiveData()
+    val reviewPostSuccess : LiveData<Boolean>
+        get() = _reviewPostSuccess
 
     // Faculty Id is stored here
     var facultyId : String? = null
@@ -72,11 +72,16 @@ class SharedViewModel : ViewModel() {
     }
 
     // Function which calls the Repository and posts the Review
-    fun postTeacherReview(individualReviewDataPost: ReviewPostData){
+    fun postTeacherReview(reviewPostData: ReviewPostData){
         viewModelScope.launch {
-            val response = myRepository.postTeacherReview(individualReviewDataPost = individualReviewDataPost)
-            _postReview.value = response
+            val response = myRepository.postTeacherReview(reviewPostData = reviewPostData)
+            _reviewPostSuccess.value = response.isSuccessful
         }
+    }
+
+    // Function to set the reviewPostSuccess variable back to false
+    fun setReviewPostSuccess(){
+        _reviewPostSuccess = MutableLiveData()
     }
 
     // Function which sets the Average Ratings for showing those in the RecyclerView and for Testing Purposes----------------------
@@ -88,28 +93,28 @@ class SharedViewModel : ViewModel() {
         var attendanceTotal = 0
         var markingPoint = 0.0
         var markingTotal = 0
-        for(element in individualReviewData){
+        for(element in individualReviewData!!){
             var overallPoint = 0.0
             var overallTotal = 0
-            if(element.rating.teachingRating?.ratedPoints != null) {
+            if(element.rating?.teachingRating?.ratedPoints != null) {
                 teachingPoint += element.rating.teachingRating.ratedPoints
                 teachingTotal++
                 overallTotal++
                 overallPoint += element.rating.teachingRating.ratedPoints
             }
-            if(element.rating.markingRating?.ratedPoints != null){
+            if(element.rating?.markingRating?.ratedPoints != null){
                 markingTotal++
                 markingPoint+= element.rating.markingRating.ratedPoints
                 overallTotal++
                 overallPoint += element.rating.markingRating.ratedPoints
             }
-            if(element.rating.attendanceRating?.ratedPoints != null){
+            if(element.rating?.attendanceRating?.ratedPoints != null){
                 attendancePoint+= element.rating.attendanceRating.ratedPoints
                 attendanceTotal ++
                 overallTotal++
                 overallPoint += element.rating.attendanceRating.ratedPoints
             }
-            element.rating.overallRating = overallPoint/overallTotal
+            element.rating?.overallRating = overallPoint/overallTotal
         }
         response.avgAttendanceRating = attendancePoint/attendanceTotal
         response.avgMarkingRating = markingPoint/markingTotal

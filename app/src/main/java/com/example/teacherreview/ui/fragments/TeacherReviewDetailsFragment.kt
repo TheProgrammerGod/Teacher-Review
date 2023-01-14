@@ -72,10 +72,10 @@ class TeacherReviewDetailsFragment : Fragment() {
     private fun setupFragmentViews(response: ReviewData){
 
         // Faculty Name Goes here
-        binding.tvTitleProfile.text = response.individualReviewData[0].faculty.name
+        binding.tvTitleProfile.text = response.individualReviewData?.get(0)?.faculty?.name
 
         // Average Rating Goes here
-        binding.tvRatingTeacherReviewDetails.text = response.individualReviewData[0].faculty.avgRating.toString()
+        binding.tvRatingTeacherReviewDetails.text = response.individualReviewData?.get(0)?.faculty?.avgRating.toString()
 
         // This is an array which contains the five ImageViews of teaching stars
         val teachingStars = listOf<ImageView>(

@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class FacultiesData(
     @SerializedName("total")
-    val totalFaculties: Int ,
+    val totalFaculties: Int = 0,
     @SerializedName("limit")
-    val fetchLimit : Int ,
+    val fetchLimit : Int = 0 ,
     @SerializedName("skip")
-    val fetchSkip : Int ,
+    val fetchSkip : Int = 0 ,
     @SerializedName("data")
-    val individualFacultyData : List<IndividualFacultyData>
+    val individualFacultyData : List<IndividualFacultyData>? = null
 )

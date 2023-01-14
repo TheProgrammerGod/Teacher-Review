@@ -134,7 +134,7 @@ class GiveTeacherReviewFragment : Fragment() {
 
             // Creating the RatingData model object to be passed to the retrofit for posting
             val ratingData = RatingData(
-                overallRating = null ,
+                overallRating = 0.0 ,
                 teachingRating = RatingParameterData(
                     ratedPoints = ivTeachingRating?.toDouble() ,
                     description = teachingReview
@@ -162,15 +162,16 @@ class GiveTeacherReviewFragment : Fragment() {
             sharedViewModel.postTeacherReview(post)
         }
 
-        // observing the postReview object to understand if our post is successful or not
-        sharedViewModel.postReview.observe(viewLifecycleOwner){ response ->
-            if(response.isSuccessful)
+        // Observer that observes the reviewPostSuccess variable
+        sharedViewModel.reviewPostSuccess.observe(viewLifecycleOwner){response ->
+            if(response)
                 Toast.makeText(requireContext() , "Review posted Successfully !!" , Toast.LENGTH_SHORT).show()
             else
                 Toast.makeText(requireContext() , "Something Went Wrong please try again After checking the Internet" , Toast.LENGTH_SHORT).show()
 
             val navController = findNavController()
             navController.navigate(R.id.action_giveTeacherReviewFragment_to_showTeacherReviewFragment)
+            sharedViewModel.setReviewPostSuccess()
         }
     }
 
@@ -201,6 +202,4 @@ class GiveTeacherReviewFragment : Fragment() {
             stars[i].setImageResource(R.drawable.zero_star_icon)
         }
     }
-
-    //TODO:- Need to fix the issue that after submitting the Review we cant open the giveReviewFragment again
 }

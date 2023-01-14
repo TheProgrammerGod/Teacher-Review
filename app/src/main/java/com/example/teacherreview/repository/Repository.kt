@@ -23,7 +23,7 @@ class Repository {
     }
 
     // This calls the API and posts a Teacher Review to the Database
-    suspend fun postTeacherReview(token : String = Constants.TOKEN , individualReviewDataPost: ReviewPostData) : retrofit2.Response<ReviewPostData>{
-        return apiInstance.postTeacherReviews(token , individualReviewDataPost)
+    suspend fun postTeacherReview(token : String = Constants.TOKEN , reviewPostData: ReviewPostData) : retrofit2.Response<ReviewPostData>{
+        return apiInstance.postTeacherReviews(token , reviewPostData)
     }
 }
