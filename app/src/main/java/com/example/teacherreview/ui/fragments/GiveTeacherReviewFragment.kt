@@ -170,7 +170,8 @@ class GiveTeacherReviewFragment : Fragment() {
                 Toast.makeText(requireContext() , "Something Went Wrong please try again After checking the Internet" , Toast.LENGTH_SHORT).show()
 
             val navController = findNavController()
-            navController.navigate(R.id.action_giveTeacherReviewFragment_to_showTeacherReviewFragment)
+//            navController.navigate(R.id.action_giveTeacherReviewFragment_to_showTeacherReviewFragment)
+            navController.popBackStack()
             sharedViewModel.setReviewPostSuccess()
         }
     }

@@ -48,10 +48,9 @@ class SharedViewModel : ViewModel() {
     }
 
     // This calls the API and fetches detailed Reviews of a Teachers
-    fun getDetailedReviews(facultyId : String){
-        this.facultyId = facultyId
+    fun getDetailedReviews(){
         viewModelScope.launch {
-            val response = myRepository.getDetailedReviews(facultyId = facultyId)
+            val response = myRepository.getDetailedReviews(facultyId = facultyId!!)
             _detailedReviewList.value = response
         }
     }
@@ -121,4 +120,12 @@ class SharedViewModel : ViewModel() {
         response.avgTeachingRating = teachingPoint/teachingTotal
         return response
     }
+
+
+    fun setFacultyID(facultyId: String){
+        this.facultyId = facultyId
+    }
+
+
+
 }

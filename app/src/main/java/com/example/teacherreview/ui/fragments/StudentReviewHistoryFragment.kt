@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teacherreview.databinding.FragmentStudentReviewHistoryBinding
 import com.example.teacherreview.ui.adapters.StudentReviewHistoryAdapter
@@ -34,6 +35,19 @@ class StudentReviewHistoryFragment : Fragment() {
 
         // Setting up the RecyclerView Instances and all the required Instances !!
         setupInstance()
+
+
+
+
+
+        val navController = findNavController()
+        
+
+
+
+
+
+
 
         // TODO :- Dummy Id Binding is done here
         sharedViewModel.getStudentReviewList("63b1f2e644b81bcd4940d18d")

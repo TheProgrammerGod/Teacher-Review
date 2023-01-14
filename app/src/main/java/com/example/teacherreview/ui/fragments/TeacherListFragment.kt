@@ -68,7 +68,8 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
     override fun onItemClick(facultyId : String) {
 
         // Calling the Function which changes the data for the observable which is then observed by TeacherReviewDetailsFragment
-        sharedViewModel.getDetailedReviews(facultyId)
+//        sharedViewModel.getDetailedReviews(facultyId)
+        sharedViewModel.setFacultyID(facultyId)
 
         // Changing Fragment to the TeacherReviewDetails Fragment
         val navController = findNavController()

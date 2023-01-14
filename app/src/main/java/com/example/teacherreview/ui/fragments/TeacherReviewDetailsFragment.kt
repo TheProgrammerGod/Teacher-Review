@@ -34,17 +34,18 @@ class TeacherReviewDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupInstances()
 
-        // Setting clickListener on the Floating Action Button which navigates to the giveTeacherReviewFragment
+        // Doing the Fetch Data call to the Server to fetch the data and populate the UI
+        sharedViewModel.getDetailedReviews()
 
-        // Sharing Amount of the Bank is necessary
+        // Setting clickListener on the Floating Action Button which navigates to the giveTeacherReviewFragment
         binding.btnAddReview.setOnClickListener{
             val navController = findNavController()
             navController.navigate(R.id.action_TeacherReviewDetailsFragment_to_giveTeacherReviewFragment)
         }
 
+        // This observes the detailedReviewList
         sharedViewModel.detailedReviewList.observe(viewLifecycleOwner){ response ->
             if(response.isSuccessful){
 
@@ -55,9 +56,8 @@ class TeacherReviewDetailsFragment : Fragment() {
                 setupFragmentViews(newData)
                 myAdapter.submitList(newData.individualReviewData)
             }
-            else{
+            else
                 Toast.makeText(requireContext() , "Internet Error !! Check Again" , Toast.LENGTH_SHORT).show()
-            }
         }
     }
 
