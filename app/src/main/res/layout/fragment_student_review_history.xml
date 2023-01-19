@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.StudentReviewHistoryFragment"
-    android:background="@color/light_black">
+    android:background="@color/light_black"
+    tools:context=".ui.fragments.StudentReviewHistoryFragment">
 
     <TextView
         android:id="@+id/tvTitle_Review_History"
@@ -35,12 +35,12 @@
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
-        android:backgroundTint="@color/yellow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/yellow"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
