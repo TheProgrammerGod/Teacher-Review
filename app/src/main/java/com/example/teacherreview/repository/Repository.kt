@@ -18,8 +18,8 @@ class Repository {
     }
 
     // This calls the API and fetches particular Student Review History Data
-    suspend fun getStudentReviewHistory(token: String = Constants.TOKEN , studentId: String) : retrofit2.Response<ReviewData>{
-        return apiInstance.getStudentReviewHistory(token , studentId)
+    suspend fun getStudentReviewHistory(token: String = Constants.TOKEN , studentId: String , skipValue : Int) : retrofit2.Response<ReviewData>{
+        return apiInstance.getStudentReviewHistory(token , studentId , skipValue)
     }
 
     // This calls the API and posts a Teacher Review to the Database

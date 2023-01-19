@@ -39,6 +39,9 @@ class SharedViewModel : ViewModel() {
     // Faculty Id is stored here
     var facultyId : String? = null
 
+    // This is the limit of the maximum number of elements that should be fetched from the server
+    var studentReviewHistoryLimit = 15
+
     // Function calls repository and fetches data from API
     fun getTeacherList(){
         viewModelScope.launch {
@@ -58,7 +61,7 @@ class SharedViewModel : ViewModel() {
     // Function calls the repository and fetches reviews given by The Student
     fun getStudentReviewList(studentId : String){
         viewModelScope.launch {
-            val response = myRepository.getStudentReviewHistory(studentId = studentId)
+            val response = myRepository.getStudentReviewHistory(studentId = studentId , skipValue = studentReviewHistoryLimit)
             _studentReviewHistoryList.value = response
         }
     }
@@ -121,11 +124,8 @@ class SharedViewModel : ViewModel() {
         return response
     }
 
-
+    // This function sets the Faculty Id
     fun setFacultyID(facultyId: String){
         this.facultyId = facultyId
     }
-
-
-
 }

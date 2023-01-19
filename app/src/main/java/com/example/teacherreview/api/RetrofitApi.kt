@@ -25,7 +25,8 @@ interface RetrofitApi {
     @GET("reviews?${"$"}populate=faculty&${"$"}populate=subject")
     suspend fun getStudentReviewHistory(
         @Header("Authorization") token: String ,
-        @Query("createdBy")studentId : String
+        @Query("createdBy")studentId : String ,
+        @Query("${"$"}limit") skipValue : Int
     ) : retrofit2.Response<ReviewData>
 
     // This calls the API and posts the Review Data to the Database
