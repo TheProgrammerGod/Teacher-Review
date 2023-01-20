@@ -45,6 +45,9 @@ class SharedViewModel : ViewModel() {
     //This is the limit of the maximum number of teachers we can fetch from the server
     var teacherListLimit = 0
 
+    //This is the limit of the maximum number of teacher Review Details we can fetch from Server
+    var teacherDetailReviewLimit = 0
+
     // Function calls repository and fetches data from API
     fun getTeacherList(){
         viewModelScope.launch {
@@ -56,7 +59,7 @@ class SharedViewModel : ViewModel() {
     // This calls the API and fetches detailed Reviews of a Teachers
     fun getDetailedReviews(){
         viewModelScope.launch {
-            val response = myRepository.getDetailedReviews(facultyId = facultyId!!)
+            val response = myRepository.getDetailedReviews(facultyId = facultyId!! , limitValue = teacherDetailReviewLimit)
             _detailedReviewList.value = response
         }
     }

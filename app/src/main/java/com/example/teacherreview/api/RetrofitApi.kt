@@ -17,7 +17,8 @@ interface RetrofitApi {
     @GET("reviews?${"$"}populate=faculty&${"$"}populate=subject")
     suspend fun getDetailedReviews(
         @Header("Authorization") token: String ,
-        @Query("faculty") facultyId : String
+        @Query("faculty") facultyId : String ,
+        @Query("${"$"}limit") limitValue: Int
     ) : retrofit2.Response<ReviewData>
 
     // This calls the API and fetches the particular Student Review History

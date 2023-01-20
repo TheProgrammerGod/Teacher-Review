@@ -10,13 +10,25 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teacherreview.R
+import com.example.teacherreview.databinding.HeaderTeacherReviewDetailsRowBinding
 import com.example.teacherreview.databinding.ItemTeacherReviewDetailsRowBinding
 import com.example.teacherreview.models.IndividualReviewData
 import com.example.teacherreview.models.RatingParameterData
 
-class TeacherReviewDetailsAdapter : ListAdapter<IndividualReviewData , TeacherReviewDetailsAdapter.TeacherReviewDetailsViewHolder>
+class TeacherReviewDetailsAdapter(private val myListener : TeacherDetailedReviewHeaderImplementation) : ListAdapter<IndividualReviewData , RecyclerView.ViewHolder>
     (TeacherReviewDetailsComparator()) {
 
+    // This Variable contains the size of the List + HEADER_SIZE
+    private var listSize = 0
+
+    // These variables are made for the Header Type and the Item Type
+    companion object{
+        private const val HEADER_TYPE = 0
+        private const val LIST_TYPE = 1
+        private const val HEADER_SIZE = 1
+    }
+
+    // Teacher Review Items ViewHolder Class
     inner class TeacherReviewDetailsViewHolder(val binding : ItemTeacherReviewDetailsRowBinding) : RecyclerView.ViewHolder(binding.root){
 
         // This is an array which contains the five ImageViews which is there in each recyclerView row
@@ -56,54 +68,100 @@ class TeacherReviewDetailsAdapter : ListAdapter<IndividualReviewData , TeacherRe
         )
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeacherReviewDetailsViewHolder {
-        val binding = ItemTeacherReviewDetailsRowBinding.inflate(LayoutInflater.from(parent.context) , parent , false)
-        return TeacherReviewDetailsViewHolder(binding)
+    // Teacher Review Header View Holder Class
+    inner class TeacherReviewDetailsHeaderViewHolder(val binding: HeaderTeacherReviewDetailsRowBinding) : RecyclerView.ViewHolder(binding.root)
+
+    // Returning the ViewType as Header type or the actual list item type
+    override fun getItemViewType(position: Int): Int {
+        if(position == 0)
+            return HEADER_TYPE
+        return LIST_TYPE
     }
 
-    override fun onBindViewHolder(holder: TeacherReviewDetailsViewHolder, position: Int) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        val review = getItem(position)
+        // Checking if the View Type is List_Type if not we execute the code below
+        if(viewType == LIST_TYPE) {
+            val binding = ItemTeacherReviewDetailsRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            return TeacherReviewDetailsViewHolder(binding)
+        }
+        val binding = HeaderTeacherReviewDetailsRowBinding.inflate(LayoutInflater.from(parent.context) , parent , false)
+        return TeacherReviewDetailsHeaderViewHolder(binding)
+    }
 
-        //TODO :-  Review Giver Name goes here (Need to correct it)
-        holder.binding.tvTeacherNameItemTeacherReviewDetails.text = review.faculty.name
+    // This function returns the  listSize along with the Header
+    override fun getItemCount(): Int {
+        return listSize
+    }
 
-        // Review of the Student Goes Here
-        holder.binding.tvReviewItemTeacherReviewDetails.text = review.review
+    // This function is made to get the List size of the ReviewData and then assign the recyclerView listSize
+    fun submitListSize(size : Int){
+        listSize = size + HEADER_SIZE
+    }
 
-        // Stars (ImageView) are set accordingly to the overallRating
-        if(review.rating?.overallRating != null)
-            calculateStars(review.rating.overallRating , holder.starsOverallRating)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position : Int) {
 
-        // Calling the setUI function to set the UI of the teaching rating
-        if(review.rating?.teachingRating != null)
-            setUI(
-                review.rating.teachingRating ,
-                holder.starsTeachingRating ,
-                holder.binding.tvReviewItemReviewDetailsTeachingReview ,
-                holder.binding.layoutItemTeacherReviewDetails ,
-                holder.binding.teachingRatingLayout
-            )
 
-        // Calling the setUI function to set the UI of the marking rating
-        if(review.rating?.markingRating != null)
-            setUI(
-                review.rating.markingRating ,
-                holder.starsMarksRating ,
-                holder.binding.tvReviewItemReviewDetailsMarkingReview ,
-                holder.binding.layoutItemTeacherReviewDetails ,
-                holder.binding.marksRatingLayout
-            )
+//        val position = pos - 1
 
-        // Calling the setUI function to set the UI of the attendance rating
-        if(review.rating?.attendanceRating != null)
-            setUI(
-                review.rating.attendanceRating ,
-                holder.starsAttendanceRating ,
-                holder.binding.tvReviewItemReviewDetailsAttendanceRating ,
-                holder.binding.layoutItemTeacherReviewDetails ,
-                holder.binding.attendanceRatingLayout
-            )
+        // If the Passed ViewHolder is of Teacher Review Item type then this block runs
+        if(holder is TeacherReviewDetailsViewHolder) {
+
+            /**
+             * We use the current position - 1 here because at position 0 header
+             * file is there and then comes the real data
+             *
+             * We take the current Data from the list and then bind the data to the UI accordingly
+              */
+            val review = getItem(position - 1)
+
+            //TODO :-  Review Giver Name goes here (Need to correct it)
+            holder.binding.tvTeacherNameItemTeacherReviewDetails.text = review.faculty.name
+
+            // Review of the Student Goes Here
+            holder.binding.tvReviewItemTeacherReviewDetails.text = review.review
+
+            // Stars (ImageView) are set accordingly to the overallRating
+            if (review.rating?.overallRating != null)
+                calculateStars(review.rating.overallRating, holder.starsOverallRating)
+
+            // Calling the setUI function to set the UI of the teaching rating
+            if (review.rating?.teachingRating != null)
+                setUI(
+                    review.rating.teachingRating,
+                    holder.starsTeachingRating,
+                    holder.binding.tvReviewItemReviewDetailsTeachingReview,
+                    holder.binding.layoutItemTeacherReviewDetails,
+                    holder.binding.teachingRatingLayout
+                )
+
+            // Calling the setUI function to set the UI of the marking rating
+            if (review.rating?.markingRating != null)
+                setUI(
+                    review.rating.markingRating,
+                    holder.starsMarksRating,
+                    holder.binding.tvReviewItemReviewDetailsMarkingReview,
+                    holder.binding.layoutItemTeacherReviewDetails,
+                    holder.binding.marksRatingLayout
+                )
+
+            // Calling the setUI function to set the UI of the attendance rating
+            if (review.rating?.attendanceRating != null)
+                setUI(
+                    review.rating.attendanceRating,
+                    holder.starsAttendanceRating,
+                    holder.binding.tvReviewItemReviewDetailsAttendanceRating,
+                    holder.binding.layoutItemTeacherReviewDetails,
+                    holder.binding.attendanceRatingLayout
+                )
+        }
+
+        // If the Passed ViewHolder is of Teacher Review Header Type then this block runs
+        if( holder is TeacherReviewDetailsHeaderViewHolder){
+
+            // Calling the Custom interface which is implemented in the Fragment
+            myListener.setTeacherDetailedReviewHeaderUI(holder.binding)
+        }
     }
 
     // Function which sets the UI of the Stars (ImageViews) and the description if any
@@ -156,5 +214,4 @@ class TeacherReviewDetailsAdapter : ListAdapter<IndividualReviewData , TeacherRe
             return (oldItem == newItem)
         }
     }
-    //TODO :- Add Paging 3 and implement it
 }

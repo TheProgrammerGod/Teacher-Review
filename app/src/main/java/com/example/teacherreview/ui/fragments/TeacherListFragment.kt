@@ -91,7 +91,7 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
                 stopFetching = layoutManager.itemCount != sharedViewModel.studentReviewHistoryLimit
 
                 // If the User Reaches the end of the List we asks for more data
-                if((isScrolling && (scrolledOutItems + currentItems == totalItems) && !stopFetching) || totalItems == currentItems){
+                if((isScrolling && (scrolledOutItems + currentItems == totalItems) && !stopFetching)){
                     fetchData()
                 }
             }

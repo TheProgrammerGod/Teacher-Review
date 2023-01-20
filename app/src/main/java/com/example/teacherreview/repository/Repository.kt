@@ -15,8 +15,8 @@ class Repository {
     }
 
     // This calls the API and fetches detailed Reviews of a particular Teachers
-    suspend fun getDetailedReviews(token : String = Constants.TOKEN , facultyId : String) : retrofit2.Response<ReviewData>{
-        return apiInstance.getDetailedReviews(token , facultyId)
+    suspend fun getDetailedReviews(token : String = Constants.TOKEN , facultyId : String , limitValue: Int) : retrofit2.Response<ReviewData>{
+        return apiInstance.getDetailedReviews(token , facultyId , limitValue)
     }
 
     // This calls the API and fetches particular Student Review History Data
