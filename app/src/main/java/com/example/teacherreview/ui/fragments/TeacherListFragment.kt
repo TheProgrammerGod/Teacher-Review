@@ -88,7 +88,7 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
 
 
                 // checking if we should stop asking for more data as the server reached its limit
-                stopFetching = layoutManager.itemCount != sharedViewModel.studentReviewHistoryLimit
+                stopFetching = layoutManager.itemCount != sharedViewModel.teacherListLimit
 
                 // If the User Reaches the end of the List we asks for more data
                 if((isScrolling && (scrolledOutItems + currentItems == totalItems) && !stopFetching)){
@@ -136,7 +136,7 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
     private fun fetchData(){
         binding.progressBar2.visibility = ProgressBar.VISIBLE
         isScrolling = false
-        sharedViewModel.teacherListLimit += 10
+        sharedViewModel.teacherListLimit += 20
         sharedViewModel.getTeacherList()
     }
 }

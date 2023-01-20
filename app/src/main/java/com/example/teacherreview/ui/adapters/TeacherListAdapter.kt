@@ -79,6 +79,4 @@ class TeacherListAdapter(private val myListener : RecyclerViewOnItemClick) : Lis
             return (newItem == oldItem)
         }
     }
-
-    //TODO :- Add Paging 3 and implement it
 }
