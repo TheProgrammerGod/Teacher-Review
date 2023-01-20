@@ -77,4 +77,7 @@ dependencies {
 
     //Firebase Dependency
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
+
+    // Paging 3 dependencies
+    implementation "androidx.paging:paging-runtime:3.1.1"
 }
