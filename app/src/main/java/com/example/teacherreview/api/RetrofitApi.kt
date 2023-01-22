@@ -14,7 +14,7 @@ interface RetrofitApi {
     ) : retrofit2.Response<FacultiesData>
 
     // This calls the API and fetches detailed Reviews of a Teacher and all about him in the database
-    @GET("reviews?${"$"}populate=faculty&${"$"}populate=subject")
+    @GET("reviews?${"$"}populate=faculty&${"$"}populate=subject&${"$"}populate=createdBy")
     suspend fun getDetailedReviews(
         @Header("Authorization") token: String ,
         @Query("faculty") facultyId : String ,
@@ -22,7 +22,7 @@ interface RetrofitApi {
     ) : retrofit2.Response<ReviewData>
 
     // This calls the API and fetches the particular Student Review History
-    @GET("reviews?${"$"}populate=faculty&${"$"}populate=subject")
+    @GET("reviews?${"$"}populate=faculty&${"$"}populate=subject&${"$"}populate=createdBy")
     suspend fun getStudentReviewHistory(
         @Header("Authorization") token: String ,
         @Query("createdBy")studentId : String ,

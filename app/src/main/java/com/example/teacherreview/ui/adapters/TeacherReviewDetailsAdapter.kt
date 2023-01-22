@@ -101,9 +101,6 @@ class TeacherReviewDetailsAdapter(private val myListener : TeacherDetailedReview
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position : Int) {
 
-
-//        val position = pos - 1
-
         // If the Passed ViewHolder is of Teacher Review Item type then this block runs
         if(holder is TeacherReviewDetailsViewHolder) {
 
@@ -111,19 +108,34 @@ class TeacherReviewDetailsAdapter(private val myListener : TeacherDetailedReview
              * We use the current position - 1 here because at position 0 header
              * file is there and then comes the real data
              *
-             * We take the current Data from the list and then bind the data to the UI accordingly
+             * We take the current Review and its Rating data from the list and
+             * then bind the data to the UI accordingly
               */
             val review = getItem(position - 1)
+            val ratings = listOf(
+                review.rating?.teachingRating?.ratedPoints ,
+                review.rating?.markingRating?.ratedPoints ,
+                review.rating?.attendanceRating?.ratedPoints
+                )
 
-            //TODO :-  Review Giver Name goes here (Need to correct it)
-            holder.binding.tvTeacherNameItemTeacherReviewDetails.text = review.faculty.name
+            //Review Giver Name Goes Here
+            holder.binding.tvTeacherNameItemTeacherReviewDetails.text = review.createdBy.name
 
             // Review of the Student Goes Here
             holder.binding.tvReviewItemTeacherReviewDetails.text = review.review
 
-            // Stars (ImageView) are set accordingly to the overallRating
-            if (review.rating?.overallRating != null)
-                calculateStars(review.rating.overallRating, holder.starsOverallRating)
+            // Stars (ImageView) are set accordingly to the Review Overall Rating given by User
+            var avgReviewRating = 0.0
+            var totalRatings = 0
+            for(rating in ratings){
+                if(rating != null) {
+                    avgReviewRating += rating
+                    totalRatings++
+                }
+            }
+            avgReviewRating /= totalRatings
+            if (avgReviewRating != 0.0)
+                calculateStars(avgReviewRating , holder.starsOverallRating)
 
             // Calling the setUI function to set the UI of the teaching rating
             if (review.rating?.teachingRating != null)
