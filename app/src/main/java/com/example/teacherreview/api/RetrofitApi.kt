@@ -10,7 +10,8 @@ interface RetrofitApi {
     @GET("faculties")
     suspend fun getTeacherList(
         @Header("Authorization") token: String,
-        @Query("${"$"}limit") limitValue: Int
+        @Query("${"$"}limit") limitValue: Int ,
+        @Query("name[${"$"}search]")facultyName : String?
     ) : retrofit2.Response<FacultiesData>
 
     // This calls the API and fetches detailed Reviews of a Teacher and all about him in the database

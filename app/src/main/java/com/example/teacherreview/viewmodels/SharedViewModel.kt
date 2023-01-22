@@ -49,9 +49,9 @@ class SharedViewModel : ViewModel() {
     var teacherDetailReviewLimit = 0
 
     // Function calls repository and fetches data from API
-    fun getTeacherList(){
+    fun getTeacherList(facultyName : String? = null){
         viewModelScope.launch {
-            val response = myRepository.getTeacherList(limitValue = teacherListLimit)
+            val response = myRepository.getTeacherList(limitValue = teacherListLimit , facultyName = facultyName)
             _teacherList.value = response
         }
     }

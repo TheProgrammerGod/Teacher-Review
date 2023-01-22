@@ -10,8 +10,8 @@ import com.example.teacherreview.utils.Constants
 class Repository {
 
     // This calls the API and fetches all the Teachers there in the Database
-    suspend fun getTeacherList(token : String = Constants.TOKEN , limitValue : Int) :retrofit2.Response<FacultiesData>{
-        return apiInstance.getTeacherList(token , limitValue)
+    suspend fun getTeacherList(token : String = Constants.TOKEN , limitValue : Int , facultyName : String? = null) :retrofit2.Response<FacultiesData>{
+        return apiInstance.getTeacherList(token , limitValue , facultyName)
     }
 
     // This calls the API and fetches detailed Reviews of a particular Teachers

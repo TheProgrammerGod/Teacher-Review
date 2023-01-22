@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.ProgressBar
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -62,6 +63,24 @@ class TeacherListFragment : Fragment() , RecyclerViewOnItemClick {
 
         // Fetching the data from the Server for the First Time
         fetchData()
+
+        // Setting the on Click Listener to the searchView so that if searches for a teacher when search is hit
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                // Calling the function to update the list of teachers
+                sharedViewModel.getTeacherList(binding.searchView.query.toString())
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
+
+
+
 
         // RecyclerView Scroll Listener which asks the ViewModel to fetch the data from the Server when the User is at the end of the RecyclerView
         binding.recyclerViewTeacherList.addOnScrollListener(object : RecyclerView.OnScrollListener(){
