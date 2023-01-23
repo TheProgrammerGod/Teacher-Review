@@ -63,8 +63,13 @@ class StudentReviewHistoryAdapter : androidx.recyclerview.widget.ListAdapter<Ind
 
     override fun onBindViewHolder(holder: StudentReviewHistoryViewHolder, position: Int) {
 
-        // review item of current Position
+        // Review item and its Ratings of current Position are assigned to variables
         val review = getItem(position)
+        val ratings = listOf(
+            review.rating?.teachingRating?.ratedPoints ,
+            review.rating?.markingRating?.ratedPoints ,
+            review.rating?.attendanceRating?.ratedPoints
+        )
 
         // Teacher Name goes Here
         holder.binding.tvTeacherNameItemReviewHistory.text = review.faculty.name
@@ -73,8 +78,18 @@ class StudentReviewHistoryAdapter : androidx.recyclerview.widget.ListAdapter<Ind
         holder.binding.tvReviewItemReviewHistory.text = review.review
 
         // Stars (ImageView) are set accordingly to the overallRating if there is some rating
-        if(review.rating?.overallRating != null)
-            calculateStars(review.rating.overallRating, holder.starsOverallRating)
+        var avgReviewRating = 0.0
+        var totalRatings = 0
+        for(rating in ratings){
+            if(rating != null) {
+                avgReviewRating += rating
+                totalRatings++
+            }
+        }
+        avgReviewRating /= totalRatings
+
+        if(avgReviewRating != 0.0)
+            calculateStars(avgReviewRating , holder.starsOverallRating)
 
         // Calling the setUI function to set the UI of the teaching rating
         if(review.rating?.teachingRating != null)
@@ -157,5 +172,4 @@ class StudentReviewHistoryAdapter : androidx.recyclerview.widget.ListAdapter<Ind
             return (oldItem == newItem)
         }
     }
-    //TODO :- Add Paging 3 and implement it
 }

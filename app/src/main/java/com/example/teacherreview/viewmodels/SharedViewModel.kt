@@ -49,9 +49,9 @@ class SharedViewModel : ViewModel() {
     var teacherDetailReviewLimit = 0
 
     // Function calls repository and fetches data from API
-    fun getTeacherList(){
+    fun getTeacherList(facultyName : String? = null){
         viewModelScope.launch {
-            val response = myRepository.getTeacherList(limitValue = teacherListLimit)
+            val response = myRepository.getTeacherList(limitValue = teacherListLimit , facultyName = facultyName)
             _teacherList.value = response
         }
     }
@@ -90,44 +90,6 @@ class SharedViewModel : ViewModel() {
     // Function to set the reviewPostSuccess variable back to false
     fun setReviewPostSuccess(){
         _reviewPostSuccess = MutableLiveData()
-    }
-
-    // Function which sets the Average Ratings for showing those in the RecyclerView and for Testing Purposes----------------------
-    fun setTeacherAverageRatings(response : ReviewData) : ReviewData{
-        val individualReviewData = response.individualReviewData
-        var teachingPoint = 0.0
-        var teachingTotal = 0
-        var attendancePoint = 0.0
-        var attendanceTotal = 0
-        var markingPoint = 0.0
-        var markingTotal = 0
-        for(element in individualReviewData!!){
-            var overallPoint = 0.0
-            var overallTotal = 0
-            if(element.rating?.teachingRating?.ratedPoints != null) {
-                teachingPoint += element.rating.teachingRating.ratedPoints
-                teachingTotal++
-                overallTotal++
-                overallPoint += element.rating.teachingRating.ratedPoints
-            }
-            if(element.rating?.markingRating?.ratedPoints != null){
-                markingTotal++
-                markingPoint+= element.rating.markingRating.ratedPoints
-                overallTotal++
-                overallPoint += element.rating.markingRating.ratedPoints
-            }
-            if(element.rating?.attendanceRating?.ratedPoints != null){
-                attendancePoint+= element.rating.attendanceRating.ratedPoints
-                attendanceTotal ++
-                overallTotal++
-                overallPoint += element.rating.attendanceRating.ratedPoints
-            }
-            element.rating?.overallRating = overallPoint/overallTotal
-        }
-        response.avgAttendanceRating = attendancePoint/attendanceTotal
-        response.avgMarkingRating = markingPoint/markingTotal
-        response.avgTeachingRating = teachingPoint/teachingTotal
-        return response
     }
 
     // This function sets the Faculty Id
