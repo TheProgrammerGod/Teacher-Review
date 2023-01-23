@@ -6,6 +6,18 @@ import retrofit2.http.*
 // This is the Interface which gives all the functions which ar later implemented by the Retrofit Library itself
 interface RetrofitApi {
 
+    // This calls the Api and posts the Login Request to the Server for Authentication
+    @POST("authentication")
+    suspend fun postLoginRequest(
+        @Body postLoginData: PostLoginData
+    ) : retrofit2.Response<UserAuthentication>
+
+    // This calls the API and post a new User Details to the Server to create a new User
+    @POST("users")
+    suspend fun postSignupRequest(
+        @Body postSignupData: PostSignupData
+    ) : retrofit2.Response<UserData>
+
     // This calls the API and fetches all the Teachers there in the Database
     @GET("faculties")
     suspend fun getTeacherList(

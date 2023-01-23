@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teacherreview.databinding.FragmentStudentReviewHistoryBinding
 import com.example.teacherreview.ui.adapters.StudentReviewHistoryAdapter
+import com.example.teacherreview.utils.Constants
 import com.example.teacherreview.viewmodels.SharedViewModel
 
 class StudentReviewHistoryFragment : Fragment() {
@@ -124,7 +125,8 @@ class StudentReviewHistoryFragment : Fragment() {
 
         // Increasing the Limit of the fetching data to get more data from the Server
         sharedViewModel.studentReviewHistoryLimit += 15
-        // TODO :- Dummy Id Binding is done here
-        sharedViewModel.getStudentReviewList("63c5241742ce4ed09f424aa2")
+
+        // Calling for the Review History with the user's Id
+        sharedViewModel.getStudentReviewList(Constants.MYUSERDATA._id)
     }
 }
