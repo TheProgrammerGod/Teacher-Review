@@ -16,10 +16,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.teacherreview.R
 import com.example.teacherreview.databinding.FragmentTeacherReviewDetailsBinding
 import com.example.teacherreview.databinding.HeaderTeacherReviewDetailsRowBinding
+import com.example.teacherreview.models.IndividualFacultyData
 import com.example.teacherreview.models.ReviewData
 import com.example.teacherreview.ui.adapters.TeacherDetailedReviewHeaderImplementation
 import com.example.teacherreview.ui.adapters.TeacherReviewDetailsAdapter
 import com.example.teacherreview.viewmodels.SharedViewModel
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class TeacherReviewDetailsFragment : Fragment() , TeacherDetailedReviewHeaderImplementation{
 
@@ -109,13 +112,10 @@ class TeacherReviewDetailsFragment : Fragment() , TeacherDetailedReviewHeaderImp
         sharedViewModel.detailedReviewList.observe(viewLifecycleOwner){
             if(it.isSuccessful){
 
-                // Calling Dummy Function to set the Average data for testing purpose
-                val newData = sharedViewModel.setTeacherAverageRatings(it.body()!!)
-
                 // setting temporary response so we can set the Layout Later when needed
-                this.response = newData
+                this.response = it.body()!!
 
-                // Submitting Values to the RecyclerView
+                // Submitting Values to the RecyclerView Adapter
                 myAdapter.submitListSize(response.individualReviewData!!.size)
                 myAdapter.submitList(response.individualReviewData)
             }
@@ -150,11 +150,22 @@ class TeacherReviewDetailsFragment : Fragment() , TeacherDetailedReviewHeaderImp
 
     // Setting the UI of the Header of the RecyclerView (It is an implementation of the TeacherDetailedReviewHeaderImplementation)
     override fun setTeacherDetailedReviewHeaderUI(binding: HeaderTeacherReviewDetailsRowBinding) {
+
+        // Made the faculty Variable to store the faculty details currently
+        lateinit var faculty : IndividualFacultyData
+        if(response.individualReviewData?.get(0)?.faculty != null)
+            faculty = response.individualReviewData?.get(0)?.faculty!!
+
         // Faculty Name Goes here
-        binding.tvTitleProfile.text = response.individualReviewData?.get(0)?.faculty?.name
+        binding.tvTitleProfile.text = faculty.name
 
         // Average Rating Goes here
-        binding.tvRatingTeacherReviewDetails.text = response.individualReviewData?.get(0)?.faculty?.avgRating.toString()
+        var avgRating = (faculty.avgTeachingRating + faculty.avgAttendanceRating + faculty.avgAttendanceRating)/ 3.0
+
+        val decimalFormat = DecimalFormat("#.##")
+        decimalFormat.roundingMode = RoundingMode.DOWN
+        avgRating = decimalFormat.format(avgRating).toDouble()
+        binding.tvRatingTeacherReviewDetails.text = avgRating.toString()
 
         // This is an array which contains the five ImageViews of teaching stars
         val teachingStars = listOf(
@@ -183,18 +194,10 @@ class TeacherReviewDetailsFragment : Fragment() , TeacherDetailedReviewHeaderImp
             binding.ivStar5AttendanceTeacherReviewDetails,
         )
 
-        // Checking if there exists an avg teaching rating and calling function to set the UI
-        if(response.avgTeachingRating != null) {
-            calculateStars(response.avgTeachingRating , teachingStars)
-        }
-
-        // Checking if there exists an avg marking rating and calling function to set the UI
-        if(response.avgMarkingRating != null)
-            calculateStars(response.avgMarkingRating , markingStars)
-
-        // Checking if there exists an avg attendance rating and calling function to set the UI
-        if(response.avgAttendanceRating != null)
-            calculateStars(response.avgAttendanceRating , attendanceStars)
+        // Assigning the Average Values to the Header File Rating Parameters
+        calculateStars(faculty.avgTeachingRating, teachingStars)
+        calculateStars(faculty.avgMarkingRating, markingStars)
+        calculateStars(faculty.avgAttendanceRating , attendanceStars)
     }
 
     // Function which asks for data from the server and shows a progress bar till we get out data

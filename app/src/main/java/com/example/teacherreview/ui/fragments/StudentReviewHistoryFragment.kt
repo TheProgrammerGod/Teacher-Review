@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teacherreview.databinding.FragmentStudentReviewHistoryBinding
 import com.example.teacherreview.ui.adapters.StudentReviewHistoryAdapter
+import com.example.teacherreview.utils.Constants
 import com.example.teacherreview.viewmodels.SharedViewModel
 
 class StudentReviewHistoryFragment : Fragment() {
@@ -96,9 +97,8 @@ class StudentReviewHistoryFragment : Fragment() {
         sharedViewModel.studentReviewHistoryList.observe(viewLifecycleOwner){ response ->
             if(response.isSuccessful){
 
-                // Calling a function which calculates the average and sets it (Dummy Setup)
-                val newData = sharedViewModel.setTeacherAverageRatings(response.body()!!)
-                myAdapter.submitList(newData.individualReviewData)
+                // Passing the Data to the Adapter class
+                myAdapter.submitList(response.body()!!.individualReviewData)
             }
             else
                 Toast.makeText(requireContext() , "No Data!! Try again Later" , Toast.LENGTH_LONG).show()
@@ -125,7 +125,8 @@ class StudentReviewHistoryFragment : Fragment() {
 
         // Increasing the Limit of the fetching data to get more data from the Server
         sharedViewModel.studentReviewHistoryLimit += 15
-        // TODO :- Dummy Id Binding is done here
-        sharedViewModel.getStudentReviewList("63b1f2e644b81bcd4940d18d")
+
+        // Calling for the Review History with the user's Id
+        sharedViewModel.getStudentReviewList(Constants.MYUSERDATA._id)
     }
 }

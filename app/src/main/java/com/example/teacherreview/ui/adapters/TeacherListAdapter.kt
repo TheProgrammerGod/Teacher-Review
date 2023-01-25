@@ -51,7 +51,7 @@ class TeacherListAdapter(private val myListener : RecyclerViewOnItemClick) : Lis
         // TODO :- Profile Pic
         holder.binding.tvTeacherNameItemTeacherList.text = faculty.name
         // TODO :- Subject Name
-        var point =faculty.avgRating
+        var point = (faculty.avgTeachingRating + faculty.avgAttendanceRating + faculty.avgAttendanceRating)/ 3.0
         var count = 0
         while (point.toInt() >= 0.9){
             holder.stars[count].setImageResource(R.drawable.full_star_icon)
