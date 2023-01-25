@@ -18,8 +18,8 @@
     <color name="dark_grey">#726C6C</color>
 
 
-
     <!--New Custom Colors and Themes of the App-->
     <color name="appBackground">#212121</color>
     <color name="blueNew">#4285F4</color>
+    <color name="textHint">#ACACAC</color>
 </resources>
