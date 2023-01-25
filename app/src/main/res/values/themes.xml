@@ -95,4 +95,38 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    
+    
+    
+    <!--New Custom Theme Set-->
+    <style name="TextViewBlue_36sp_New">
+        <item name="android:textColor">@color/blueNew</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextViewWhite_20sp_New">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    
+    <style name="TextViewWhite_26sp_New">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextViewWhite_24sp_New">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    
+    
+    
 </resources>
