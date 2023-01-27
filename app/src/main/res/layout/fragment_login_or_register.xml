@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appBackground"
+    tools:context=".ui.fragments.LoginOrRegister">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:contentDescription="Forward Arrow"
+            android:src="@drawable/image_happy_face" />
+
+        <TextView
+            style="@style/TextViewWhite_26sp_New"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
+            android:text="Welcome Back" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_waving_hand" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardLoginButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="62dp"
+            android:backgroundTint="@color/appBackground"
+            app:cardCornerRadius="24dp"
+            app:strokeColor="@color/blueNew"
+            app:strokeWidth="2dp">
+
+            <TextView
+                style="@style/TextViewWhite_20sp_New"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingStart="80dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="80dp"
+                android:paddingBottom="8dp"
+                android:text="LOGIN" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardRegisterButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/appBackground"
+            app:cardCornerRadius="24dp"
+            app:strokeColor="@color/blueNew"
+            app:strokeWidth="2dp">
+
+            <TextView
+                style="@style/TextViewWhite_20sp_New"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingStart="80dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="80dp"
+                android:paddingBottom="8dp"
+                android:text="REGISTER" />
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

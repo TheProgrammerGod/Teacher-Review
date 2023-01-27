@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/welcoming_navigation"
+    app:startDestination="@id/getAllYouWant">
+
+    <fragment
+        android:id="@+id/getAllYouWant"
+        android:name="com.example.teacherreview.ui.fragments.GetAllYouWant"
+        android:label="fragment_get_all_you_want"
+        tools:layout="@layout/fragment_get_all_you_want">
+        <action
+            android:id="@+id/action_getAllYouWant_to_loginOrRegister"
+            app:destination="@id/loginOrRegister"
+            app:enterAnim="@android:anim/fade_in" />
+    </fragment>
+    <activity
+        android:id="@+id/homePageActivity"
+        android:name="com.example.teacherreview.ui.HomePageActivity"
+        android:label="activity_home_page"
+        tools:layout="@layout/activity_home_page" />
+    <fragment
+        android:id="@+id/loginOrRegister"
+        android:name="com.example.teacherreview.ui.fragments.LoginOrRegister"
+        android:label="fragment_login_or_register"
+        tools:layout="@layout/fragment_login_or_register">
+        <action
+            android:id="@+id/action_loginOrRegister_to_loginScreen"
+            app:destination="@id/loginScreen" />
+        <action
+            android:id="@+id/action_loginOrRegister_to_registerScreen"
+            app:destination="@id/registerScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginScreen"
+        android:name="com.example.teacherreview.ui.fragments.LoginScreen"
+        android:label="fragment_login_screen"
+        tools:layout="@layout/fragment_login_screen">
+        <action
+            android:id="@+id/action_loginScreen_to_homePageActivity"
+            app:destination="@id/homePageActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerScreen"
+        android:name="com.example.teacherreview.ui.fragments.RegisterScreen"
+        android:label="fragment_register_screen"
+        tools:layout="@layout/fragment_register_screen">
+        <action
+            android:id="@+id/action_registerScreen_to_loginScreen"
+            app:destination="@id/loginScreen" />
+    </fragment>
+</navigation>
