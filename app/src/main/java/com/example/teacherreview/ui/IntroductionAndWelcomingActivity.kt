@@ -7,11 +7,10 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.teacherreview.R
 import com.example.teacherreview.databinding.ActivityIntroductionAndWelcomingBinding
 
-class IntroductionAndWelcoming : AppCompatActivity() {
+class IntroductionAndWelcomingActivity : AppCompatActivity() {
 
     // Binding Variable
     private lateinit var binding : ActivityIntroductionAndWelcomingBinding
-
     // NavController variable
     private lateinit var navController: NavController
 

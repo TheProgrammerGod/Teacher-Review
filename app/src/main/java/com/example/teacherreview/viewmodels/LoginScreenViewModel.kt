@@ -10,7 +10,7 @@ import com.example.teacherreview.repository.Repository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class LoginPageViewModel() : ViewModel() {
+class LoginScreenViewModel() : ViewModel() {
 
 //    private lateinit var signInOptions: GoogleSignInOptions
 //    private var signInRequest: BeginSignInRequest

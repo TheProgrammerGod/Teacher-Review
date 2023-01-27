@@ -38,9 +38,6 @@
         android:label="fragment_login_screen"
         tools:layout="@layout/fragment_login_screen">
         <action
-            android:id="@+id/action_loginScreen_to_registerScreen"
-            app:destination="@id/registerScreen" />
-        <action
             android:id="@+id/action_loginScreen_to_homePageActivity"
             app:destination="@id/homePageActivity" />
     </fragment>

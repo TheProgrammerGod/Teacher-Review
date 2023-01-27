@@ -10,7 +10,7 @@ import com.example.teacherreview.repository.Repository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class SignupActivityViewModel : ViewModel(){
+class RegisterScreenViewModel : ViewModel(){
 
     // Repository variable of the viewModel
     private val myRepository = Repository()

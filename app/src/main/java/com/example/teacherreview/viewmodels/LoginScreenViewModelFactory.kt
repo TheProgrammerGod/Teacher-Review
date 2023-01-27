@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 // This is the Login Activity View Model Provider
-class LoginPageViewModelFactory : ViewModelProvider.Factory {
+class LoginScreenViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return LoginPageViewModel() as T
+        return LoginScreenViewModel() as T
     }
 }
